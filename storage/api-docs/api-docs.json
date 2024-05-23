@@ -1,0 +1,248 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "babyneed Api",
+        "description": "Laravel project to practice developing Rest API with L5 Swagger OpenApi",
+        "contact": {
+            "name": "Bambang",
+            "email": "bambang.4220233005@civitas.ukrida.ac.id"
+        },
+        "version": "1.0",
+        "x-logo": {
+            "url": "https://static.vecteezy.com/system/resources/previews/004/657/170/original/baby-shop-logo-with-cute-baby-face-illustration-free-vector.jpg"
+        }
+    },
+    "paths": {
+        "/api/babyneed": {
+            "get": {
+                "tags": [
+                    "Babyneeds"
+                ],
+                "summary": "Display a listing of items",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "seccessful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Babyneeds"
+                ],
+                "summary": "Store a newly created item",
+                "operationId": "store",
+                "requestBody": {
+                    "description": "Request body description",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Babyneed"
+                            },
+                            "example": {
+                                "Nama": "T SHIRT AND DENIM JOGGERS SET",
+                                "ukuran": "6 bulan",
+                                "image": "https://freepngimg.com/png/53976-baby-clothes-download-hq-png",
+                                "description": "baju ini sangat nyaman dan tipis tidak membuat bayi keringatan.",
+                                "price": 50000
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/babyneed/{id}": {
+            "get": {
+                "tags": [
+                    "Babyneeds"
+                ],
+                "summary": "Display the specified item",
+                "operationId": "show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of item that needs to be displayed",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Babyneeds"
+                ],
+                "summary": "Update the specified item",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID item that needs to be updated",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Request body description",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Babyneed"
+                            },
+                            "example": {
+                                "Nama": "T SHIRT AND DENIM JOGGERS SET",
+                                "ukuran": "6 bulan",
+                                "image": "https://freepngimg.com/png/53976-baby-clothes-download-hq-png",
+                                "description": "baju ini sangat nyaman dan tipis tidak membuat bayi keringatan",
+                                "price": 50000
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Babyneeds"
+                ],
+                "summary": "Remove the specified item",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID item that needs to be updated",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Babyneed": {
+                "title": "Babyneed model",
+                "description": "Babyneed model",
+                "required": [
+                    "nama"
+                ],
+                "xml": {
+                    "name": "Babyneed"
+                }
+            }
+        }
+    }
+}
