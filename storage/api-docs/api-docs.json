@@ -393,14 +393,15 @@
                 }
             },
             "User": {
-                "title": "Babyneed model",
-                "description": "Babyneed model",
+                "title": "User model",
+                "description": "User model",
                 "required": [
-                    "nama",
-                    "size"
+                    "name",
+                    "email",
+                    "password"
                 ],
                 "xml": {
-                    "name": "Babyneed"
+                    "name": "User"
                 }
             }
         },
