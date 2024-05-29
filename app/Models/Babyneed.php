@@ -30,7 +30,7 @@ class Babyneed extends Model
     protected $table = 'babyneedseller';
     protected $fillable = [
         'nama',
-        'ukuran',
+        'size',
         'price',
         'description',
         'image',

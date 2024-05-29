@@ -61,7 +61,8 @@ class BabyneedsController extends Controller
      *                        "image": "https://freepngimg.com/png/53976-baby-clothes-download-hq-png"            
      *              }
      *          ),
-     *      )
+     *      ),
+     *      security={{"passport_token_ready":{},"passport":{}}}
      * )
      */
     public function store(Request $request)
@@ -166,7 +167,8 @@ class BabyneedsController extends Controller
  *                        "image": "https://freepngimg.com/png/53976-baby-clothes-download-hq-png"
  *               }                     
  *          ),
- *      )
+ *      ),
+ *      security={{"passport_token_ready":{},"passport":{}}}
  * )
  */
     public function update(Request $request, $id)
@@ -223,6 +225,7 @@ class BabyneedsController extends Controller
      *              format="int64"
      *          )
      *      ),
+     *      security={{"passport_token_ready":{},"passport":{}}}
      *   )
      */
     public function destroy($id)
