@@ -10,7 +10,7 @@ use OpenApi\Annotations as OA;
  *      description="Laravel project to practice developing Babyneed API with L5 Swagger OpenApi",
  *      x={
  *          "logo": {
- *              "url":  "https://static.vecteezy.com/system/resources/previews/004/657/170/original/baby-shop-logo-with-cute-baby-face-illustration-free-vector.jpg"
+ *              "url": "https://static.vecteezy.com/system/resources/previews/004/657/170/original/baby-shop-logo-with-cute-baby-face-illustration-free-vector.jpg"
  *              }
  *         },
  *          @OA\Contact(
