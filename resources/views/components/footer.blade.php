@@ -3,6 +3,8 @@
     <div class="footer-area section-space--pb_90">
         <div class="container-fluid container-fluid--cp-100">
             <div class="row footer-widget-wrapper">
+
+                
                 
                 <div class="col-lg-3 col-md-4 col-sm-6 footer-widget">
                     <h6 class="footer-widget_title mb-20">Customer Service</h6>
@@ -36,7 +38,8 @@
                         <input type="text" placeholder="Your email address">
                         <button class="submit-button"><i class="icon-arrow-right"></i></button>
                     </div>
-                    <ul class="footer-widget_footer-menu section-space--mt_60 d-none d-lg-block">
+                    <ul class="footer-widget__footer-menu  section-space--mt_60 d-none 
+                    d-lg-block">
                         <li><a href="#">Term & Condition</a></li>
                         <li><a href="#">Policy</a></li>
                         <li><a href="#">Map</a></li>

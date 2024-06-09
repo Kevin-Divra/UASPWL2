@@ -84,8 +84,8 @@
                                 </div>
                                 <div class="shop-toolbar__item ">
                                     <select class="_filter form-select form-select-sm" name="_sort_by" onchange="getData()">
-                                        <option value="name_asc">Sort by A-Z</option>
-                                        <option value="name_desc">Sort by Z-A</option>
+                                        <option value="Nama_asc">Sort by A-Z</option>
+                                        <option value="Nama_desc">Sort by Z-A</option>
                                         <option value="latest_added">Sort by time added</option>
                                         <option value="price_asc">Sort by price: low to high</option>
                                         <option value="price_desc">Sort by price: high to low</option>
@@ -109,7 +109,8 @@
                         <div class="row" id="product-list"></div>
                         <div class="row">
                             <div class="col-12">
-                                <ul class="page-pagination text-center mt-40" id="product-list-pagination"></ul>
+                                <ul class="page-pagination text-center mt-40" 
+                                id="product-list-pagination"></ul>
                             </div>
                         </div>
                     </div>

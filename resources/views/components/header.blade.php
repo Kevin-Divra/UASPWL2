@@ -21,7 +21,7 @@
                         </span>
                     </div>
                     <div class="logo__hidden text-start">
-                        <a href="{{route('home')}}"><img src="{{asset('assets/images/logo/logo.png')}}" alt="" style="height:50px"></a>
+                        <a href="{{route('home')}}"><img src="{{asset('assets/images/logo/logo.png')}}" alt="" style="height:40px"></a>
                     </div>
                 </div>
 

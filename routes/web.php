@@ -11,7 +11,7 @@ Route::get('/babyneed', function () {
     return view('pages.plp');
 })->name('plp');
 
-Route::get('/babyneed{i}', function () {
+Route::get('/babyneed/{i}', function () {
     return view('pages.pdp');
 })->name('pdp');
 
