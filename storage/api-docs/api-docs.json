@@ -228,7 +228,7 @@
                                 "$ref": "#/components/schemas/Babyneed"
                             },
                             "example": {
-                                "nama": "DENIM JOGGERS SET",
+                                "Nama": "DENIM JOGGERS SET",
                                 "size": "8 bulan",
                                 "price": "15000",
                                 "description": "baju ini sangat nyaman dan tipis tidak membuat bayi keringatan",
@@ -336,7 +336,7 @@
                                 "$ref": "#/components/schemas/Babyneed"
                             },
                             "example": {
-                                "nama": "JOGGERS SET",
+                                "Nama": "JOGGERS SET",
                                 "size": "9 bulan",
                                 "price": "500000",
                                 "description": "baju ini sangat hangat sehingga akan membuat bayi anda tetap hangat",

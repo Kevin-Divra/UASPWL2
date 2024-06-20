@@ -149,7 +149,7 @@ class BabyneedsController extends Controller
      *          description="Request body description",
      *          @OA\JsonContent(
      *              ref="#/components/schemas/Babyneed",
-     *              example={ "nama": "DENIM JOGGERS SET", "size": "8 bulan",   "price": "15000", 
+     *              example={ "Nama": "DENIM JOGGERS SET", "size": "8 bulan",  "price": "15000", 
      *                        "description": "baju ini sangat nyaman dan tipis tidak membuat bayi keringatan",
      *                        "image": "https://freepngimg.com/thumb/jeans/54011-8-baby-clothes-free-photo-png.png"            
      *              }
@@ -255,7 +255,7 @@ class BabyneedsController extends Controller
  *          description="Request body description",
  *          @OA\JsonContent(
  *              ref="#/components/schemas/Babyneed",
- *              example={ "nama": "JOGGERS SET", "size": "9 bulan", "price": "500000", 
+ *              example={ "Nama": "JOGGERS SET", "size": "9 bulan", "price": "500000", 
  *                        "description": "baju ini sangat hangat sehingga akan membuat bayi anda tetap hangat",
  *                        "image": "https://freepngimg.com/png/53976-baby-clothes-download-hq-png"
  *               }                     
@@ -273,7 +273,7 @@ class BabyneedsController extends Controller
 
         try {
             $validator = Validator::make($request->all(), [
-                'nama' => 'required',
+                'Nama' => 'required',
                 'size' => 'required',
             ]);
             if ($validator->fails()) {
