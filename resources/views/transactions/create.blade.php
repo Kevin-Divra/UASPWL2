@@ -11,7 +11,7 @@
             background-color: #f4f6f9;
         }
         .container {
-            max-width: 800px;
+            max-width: auto;
         }
         h3 {
             color: #343a40;
