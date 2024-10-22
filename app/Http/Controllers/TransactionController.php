@@ -172,8 +172,6 @@ class TransactionController extends Controller
                     'id_transaksi_penjualan' => $id,
                     'id_product' => $product_id,
                     'jumlah_pembelian' => $quantities[$index],
-                    'created_at' => now(),
-                    'updated_at' => now(),
                 ]);
             }
 
