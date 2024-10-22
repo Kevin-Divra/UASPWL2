@@ -55,7 +55,7 @@ class SupplierController extends Controller
         // Redirect to index
             return redirect()->route('supplier.index')->with(['success' => 'Data Berhasil Disimpan!']);
         }  catch (\Exception $e) {
-        return redirect()->route('supplier.index')->with(['error' => 'Failed to upload image.']);        
+        return redirect()->route('supplier.index')->with(['error' => 'Failed to save data.']);        
         }
     }
 
