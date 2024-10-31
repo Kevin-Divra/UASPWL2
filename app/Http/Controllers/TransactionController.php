@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 
 class TransactionController extends Controller
@@ -202,5 +203,21 @@ class TransactionController extends Controller
         return redirect()->route('transaction.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 
+    public function sendEmail($to, $id)
+    {
+        $detail_transaksi = new Transaction;
+       
+        $data = $detail_transaksi->get_transaction()->where("id_transaksi_penjualan", $id)->firstOrFail();
         
+        $total_harga = $data->total_harga;
+        $transaction_ = [
+            'data'=> $data,
+            'total_harga'=> $total_harga
+        ];
+        Mail::send('transactions.show', $transaction_, function ($message) use ($to, $data, $total_harga) {
+            $message->to($to)
+                    ->subject("detail_transaksi: {$data->email_pembeli} - dengan total tagihan RP ".number_format($total_harga, 2, ',', '.').".");
+        });
+        return response()->json(['message' => 'Email sent successfully!']);
+    }
 }
