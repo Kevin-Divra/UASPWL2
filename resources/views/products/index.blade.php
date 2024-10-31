@@ -253,7 +253,11 @@
 </head>
 <body>
     <div class="sidebar">
+<<<<<<< HEAD
         <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+=======
+        <h2><i class="fas fa-tachometer-alt" style="margin-right: 10px"></i> Dashboard</h2>
+>>>>>>> main
         <a href="#"><i class="fas fa-box"></i> Products</a>
         <a href="{{ url('/supplier') }}"><i class="fas fa-truck"></i> Suppliers</a>
         <a href="{{ url('/transaction') }}"><i class="fas fa-money-bill-wave"></i> Transaction</a>
@@ -282,9 +286,15 @@
                         @forelse ($products as $product)
                             <tr>
                                 <td><img src="{{  asset('storage/images/' . $product->image) }}" alt="Product Image" width="100"></td>
+<<<<<<< HEAD
                                 <td>{{ $product->supplier_name }}</td>
                                 <td>{{ $product->title }}</td>
                                 <td>{{ $product->product_category_name }}</td>
+=======
+                                <td>{{ ucwords($product->supplier_name) }}</td>
+                                <td>{{ ucwords($product->title) }}</td>
+                                <td>{{ ucwords($product->product_category_name) }}</td>
+>>>>>>> main
                                 <td>{{ "Rp " . number_format($product->price,2,',','.') }}</td>
                                 <td>{{ $product->stock }}</td>
                                 <td>

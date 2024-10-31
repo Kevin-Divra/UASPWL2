@@ -31,4 +31,8 @@ class Supplier extends Model
             'pic_supplier'        => $request->pic_supplier,    
         ]);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> main

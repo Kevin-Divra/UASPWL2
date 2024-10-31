@@ -253,7 +253,11 @@
 </head>
 <body>
     <div class="sidebar">
+<<<<<<< HEAD
         <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+=======
+        <h2><i class="fas fa-tachometer-alt" style="margin-right: 10px"></i> Dashboard</h2>
+>>>>>>> main
         <a href="{{ url('/products') }}"><i class="fas fa-box"></i> Products</a>
         <a href="{{ url('/supplier') }}"><i class="fas fa-truck"></i> Suppliers</a>
         <a href="{{ url('/transaction') }}"><i class="fas fa-money-bill-wave"></i> Transaction</a>
@@ -279,10 +283,17 @@
                     <tbody>
                         @forelse ($suppliers as $supplier)
                             <tr>
+<<<<<<< HEAD
                                 <td>{{ $supplier->supplier_name }}</td>
                                 <td>{{ $supplier->alamat_supplier }}</td>
                                 <td>{{ $supplier->pic_supplier }}</td>
                                 <td>{{ $supplier->no_hp_pic_supplier }}</td>
+=======
+                                <td>{{ ucwords($supplier->supplier_name) }}</td>
+                                <td>{{ ucwords($supplier->alamat_supplier) }}</td>
+                                <td>{{ ucwords($supplier->pic_supplier) }}</td>
+                                <td>{{ ucwords($supplier->no_hp_pic_supplier) }}</td>
+>>>>>>> main
                                 <td>
                                     <form id="delete-form-{{ $supplier->id }}" action="{{ route('supplier.destroy', $supplier->id) }}" method="POST" style="display: inline;">
                                         @csrf
@@ -368,4 +379,8 @@
         @endif
     </script>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> main
