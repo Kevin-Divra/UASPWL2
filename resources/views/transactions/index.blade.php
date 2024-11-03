@@ -272,6 +272,7 @@
                         <tr>
                             <th >TANGGAL TRANSAKSI</th>
                             <th >CASHIER NAME</th>
+                            <th >BUYER EMAIL</th>
                             <th >PRODUCT NAME</th>
                             <th >PRICE</th>
                             <th >UNIT</th>
@@ -298,6 +299,7 @@
                                 @if ($index === 0)
                                     <td rowspan="{{ $rowCount }}">{{ $transaction->created_at }}</td>
                                     <td rowspan="{{ $rowCount }}">{{ ucwords($transaction->nama_kasir) }}</td>
+                                    <td rowspan="{{ $rowCount }}">{{ ucwords($transaction->email_pembeli) }}</td>
                                 @endif
                                 <td>{{ ucwords($product_name) }}</td>
                                 <td>{{ number_format($prices[$index], 2, ',', '.') }}</td>

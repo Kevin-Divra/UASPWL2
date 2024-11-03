@@ -46,6 +46,7 @@
                             <h5>Transaction ID: {{ $data->id }}</h5>
                             <p><strong>Date:</strong> {{ $data->created_at->format('d-m-Y H:i') }}</p>
                             <p><strong>Cashier Name:</strong> {{ ucwords($data->nama_kasir) }}</p>
+                            <p><strong>Email Buyer:</strong> {{ ucwords($data->email_pembeli) }}</p>
                         </div>
 
                         <!-- Products Table -->

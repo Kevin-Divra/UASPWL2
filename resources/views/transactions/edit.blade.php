@@ -97,6 +97,12 @@
                         </select>
                     </div>
 
+                    <div class="form-group mb-3">
+                        <label for="email_pembeli">Buyer Email</label>
+                        <input type="email" class="form-control" id="email_pembeli" name="email_pembeli" value="{{ old('email_pembeli', $data['transactions']->email_pembeli) }}" required>
+                    </div>
+
+
                     <!-- Product container for dynamic products -->
                     <div id="product-container">
                         @foreach (explode(', ', $data['transactions']->product_names) as $index => $productName)
