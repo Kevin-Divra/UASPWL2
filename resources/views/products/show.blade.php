@@ -127,28 +127,16 @@
             </div>
             <div class="col-md-8">
                 <div class="card border-0 shadow-sm rounded p-4">
-<<<<<<< HEAD
                     <h3 class="product-header">{{ $product->title }}</h3>
                     <hr />
                     <p class="product-details">Category: <strong>{{ $product->product_category_name }}</strong></p>
                     <hr />
                     <p class="product-details">Supplier: <strong>{{ $product->supplier_name }}</strong></p>
-=======
-                    <h3 class="product-header">{{ ucwords($product->title) }}</h3>
-                    <hr />
-                    <p class="product-details">Category: <strong>{{ ucwords($product->product_category_name) }}</strong></p>
-                    <hr />
-                    <p class="product-details">Supplier: <strong>{{ ucwords($product->supplier_name) }}</strong></p>
->>>>>>> main
                     <hr />
                     <p class="product-price">Price: Rp{{ number_format($product->price, 2, ',', '.') }}</p>
                     <hr />
                     <code>
-<<<<<<< HEAD
                         <p>{!! $product->description !!}</p>
-=======
-                        <p>{!! ucwords($product->description) !!}</p>
->>>>>>> main
                     </code>
                     <hr />
                     <p class="product-details">Stock: <strong>{{ $product->stock }}</strong></p>
@@ -161,8 +149,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> main

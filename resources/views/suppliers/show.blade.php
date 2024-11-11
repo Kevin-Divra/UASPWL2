@@ -100,54 +100,22 @@
 
         <!-- Supplier Name -->
         <p class="supplier-title">Supplier Name:</p>
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <p class="supplier-info">{{ $supplier->supplier_name }}</p>
-=======
         <p class="supplier-info">{{ ucwords($supplier->supplier_name) }}</p>
->>>>>>> main
-=======
-        <p class="supplier-info">{{ ucwords($supplier->supplier_name) }}</p>
->>>>>>> bambang_422023005
         <div class="separator"></div>
 
         <!-- Supplier Address -->
         <p class="supplier-title">Supplier Address:</p>
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <p class="supplier-info">{{ $supplier->alamat_supplier }}</p>
-=======
         <p class="supplier-info">{{ ucwords($supplier->alamat_supplier) }}</p>
->>>>>>> main
-=======
-        <p class="supplier-info">{{ ucwords($supplier->alamat_supplier) }}</p>
->>>>>>> bambang_422023005
         <div class="separator"></div>
 
         <!-- PIC Supplier -->
         <p class="supplier-title">PIC Supplier:</p>
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <p class="supplier-info">{{ $supplier->pic_supplier }}</p>
-=======
         <p class="supplier-info">{{ ucwords($supplier->pic_supplier) }}</p>
->>>>>>> main
-=======
-        <p class="supplier-info">{{ ucwords($supplier->pic_supplier) }}</p>
->>>>>>> bambang_422023005
         <div class="separator"></div>
 
         <!-- No. HP PIC Supplier -->
         <p class="supplier-title">No. HP PIC Supplier:</p>
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <p class="supplier-info">{{ $supplier->no_hp_pic_supplier }}</p>
-=======
         <p class="supplier-info">{{ ucwords($supplier->no_hp_pic_supplier) }}</p>
->>>>>>> main
-=======
-        <p class="supplier-info">{{ ucwords($supplier->no_hp_pic_supplier) }}</p>
->>>>>>> bambang_422023005
 
         <a href="javascript:history.back()" class="btn-back">Back</a>
     </div>
@@ -155,12 +123,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> main
-=======
-</html>
->>>>>>> bambang_422023005

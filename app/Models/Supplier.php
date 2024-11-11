@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Supplier extends Model
 {
@@ -16,9 +17,9 @@ class Supplier extends Model
         'pic_supplier',
     ];
 
-    public function get_supplier()
-    {
-        return $this->select("suppliers.*");
+    public function get_supplier(){
+        $sql = $this->select("suppliers.*");
+        return $sql;
     }
 
     public static function storeSupplier($request)

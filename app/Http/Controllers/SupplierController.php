@@ -15,6 +15,7 @@ class SupplierController extends Controller
     * index
     * @return void
     */
+
     public function index() : View
     {
         $supplier = new Supplier;
@@ -24,6 +25,7 @@ class SupplierController extends Controller
     
         return view('suppliers.index', compact('suppliers'));    
     }
+
 
     /* 
     * store
@@ -41,7 +43,7 @@ class SupplierController extends Controller
         ]);
 
         try {
-            // Save supplier data to the database
+            // Simpan data supplier ke database
             Supplier::create([
                 'alamat_supplier'     => $request->alamat_supplier,
                 'supplier_name'       => $request->supplier_name,
@@ -49,18 +51,21 @@ class SupplierController extends Controller
                 'pic_supplier'        => $request->pic_supplier,
             ]);
     
-            // Redirect to index
+
+        // Redirect to index
             return redirect()->route('supplier.index')->with(['success' => 'Data Berhasil Disimpan!']);
-        } catch (\Exception $e) {
-            return redirect()->route('supplier.index')->with(['error' => 'Failed to save supplier data.']);        
+        }  catch (\Exception $e) {
+        return redirect()->route('suppliers.index')->with(['error' => 'Failed to upload image.']);        
         }
     }
+
 
     /* 
     * create
     *
     * @return View
     */
+
     public function create() : View
     {
         $supplier = new Supplier;
@@ -68,6 +73,7 @@ class SupplierController extends Controller
 
         return view('suppliers.create', compact('data'));    
     }
+
 
     /**
      * show
@@ -93,10 +99,13 @@ class SupplierController extends Controller
     {
         $supplier_model = new Supplier();
         $data['supplier'] = $supplier_model->get_supplier()->where("suppliers.id", $id)->firstOrFail();
+
         $data['suppliers'] = $supplier_model->get_supplier()->get();
 
         return view('suppliers.edit', compact('data'));
     }
+
+
 
     /**
     * update
@@ -107,7 +116,7 @@ class SupplierController extends Controller
     */
     public function update(Request $request, $id): RedirectResponse
     {
-        // Validate form
+        //validate form
         $request->validate([
             'alamat_supplier'     => 'required|min:5',
             'supplier_name'       => 'required|min:1',
@@ -115,9 +124,10 @@ class SupplierController extends Controller
             'pic_supplier'        => 'required|min:1',
         ]);
 
-        // Get supplier by ID
+        //get supplier by ID
         $supplier_model = new Supplier();
         $supplier = $supplier_model->get_supplier()->where("suppliers.id", $id)->firstOrFail();
+
 
         $supplier->update([
             'alamat_supplier'     => $request->alamat_supplier,
@@ -129,6 +139,7 @@ class SupplierController extends Controller
         return redirect()->route('supplier.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
+
     /**
     * destroy
     * 
@@ -137,14 +148,17 @@ class SupplierController extends Controller
     */
     public function destroy($id): RedirectResponse
     {
-        // Get supplier by ID
+        // get supplier by ID
         $supplier_model = new Supplier();
         $supplier = $supplier_model->get_supplier()->where("suppliers.id", $id)->firstOrFail();
 
-        // Delete supplier
+
+        // delete supplier
         $supplier->delete();
 
-        // Redirect to index
+        // redirect to index
         return redirect()->route('supplier.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
+
+
 }

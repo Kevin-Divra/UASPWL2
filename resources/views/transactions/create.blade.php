@@ -113,15 +113,12 @@
                                 </select>
                             </div>
 
-<<<<<<< HEAD
-=======
                             <div class="form-group mb-4">
                                 <label for="nama_kasir_id">Email</label>
                                 <input type="email" class="form-control" name="email_pembeli" placeholder="Enter Your Email">
                             </div>
 
 
->>>>>>> bambang_422023005
                             <!-- Product container for dynamic products -->
                             <div id="product-container">
                                 <div class="product-row">
@@ -261,8 +258,4 @@
         addInitialProduct();
     </script>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> bambang_422023005
