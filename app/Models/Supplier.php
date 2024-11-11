@@ -32,6 +32,9 @@ class Supplier extends Model
         ]);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> bambang_422023005
 }
 =======
 }

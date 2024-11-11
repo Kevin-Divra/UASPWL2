@@ -7,6 +7,7 @@
     <title>Edit Supplier</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <<<<<<< HEAD
+<<<<<<< HEAD
 </head>
 <body style="background: lightgray">
 
@@ -78,6 +79,8 @@
     </div>
     
 =======
+=======
+>>>>>>> bambang_422023005
     <style>
         body {
             background-color: #f7f9fc;
@@ -200,11 +203,15 @@
             </div>  
         </div>
     </div>
+<<<<<<< HEAD
 >>>>>>> main
+=======
+>>>>>>> bambang_422023005
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
     <script>
+<<<<<<< HEAD
 <<<<<<< HEAD
         CKEDITOR.replace( 'description' );
     </script>
@@ -216,3 +223,9 @@
 </body>
 </html>
 >>>>>>> main
+=======
+        CKEDITOR.replace('description');
+    </script>
+</body>
+</html>
+>>>>>>> bambang_422023005

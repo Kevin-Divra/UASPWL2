@@ -7,6 +7,7 @@
     <title>Add New Supplier</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <<<<<<< HEAD
+<<<<<<< HEAD
 </head>
 <body style="background: lightgray">
 
@@ -16,6 +17,8 @@
                 <h3>Add New Suppliers</h3>
                 <div class="card border-0 shadow-sm rounded">
 =======
+=======
+>>>>>>> bambang_422023005
     <style>
         body {
             background: #f4f6f9;
@@ -103,11 +106,15 @@
             <div class="col-md-12">
                 <h3>Add New Supplier</h3>
                 <div class="card">
+<<<<<<< HEAD
 >>>>>>> main
+=======
+>>>>>>> bambang_422023005
                     <div class="card-body">
                         <form id="supplierForm" action="{{ route('supplier.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
+<<<<<<< HEAD
 <<<<<<< HEAD
                             <div class="form-group mb-3">
                                 <label for="supplier_name">Supplier Name</label>
@@ -133,6 +140,8 @@
                             <button type="submit" class="btn btn-md btn-primary me-3">SAVE</button>
                             <button type="button" id="resetBtn" onclick="resetForm()" class="btn btn-md btn-warning">RESET</button>
 =======
+=======
+>>>>>>> bambang_422023005
                             <div class="form-group">
                                 <label for="supplier_name">Supplier Name</label>
                                 <input class="form-control" id="supplier_name" name="supplier_name" placeholder="Masukkan Nama Supplier"></input>
@@ -157,7 +166,10 @@
                                 <button type="submit" class="btn btn-md btn-primary">SAVE</button>
                                 <button type="button" id="resetBtn" onclick="resetForm()" class="btn btn-md btn-warning">RESET</button>
                             </div>
+<<<<<<< HEAD
 >>>>>>> main
+=======
+>>>>>>> bambang_422023005
                         </form>
                     </div>
                 </div>
@@ -165,9 +177,13 @@
         </div>
     </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     
 >>>>>>> main
+=======
+    
+>>>>>>> bambang_422023005
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
 
@@ -175,6 +191,7 @@
         CKEDITOR.replace('description');
 
         function resetForm() {
+<<<<<<< HEAD
 <<<<<<< HEAD
             document.getElementById("supplierForm").reset(); // Reset semua nilai dalam form
 
@@ -185,6 +202,8 @@
         }
     </script>
 =======
+=======
+>>>>>>> bambang_422023005
             document.getElementById("supplierForm").reset();
             for (var instance in CKEDITOR.instances) {
                 CKEDITOR.instances[instance].setData('');
@@ -193,5 +212,9 @@
     </script>
 
 </body>
+<<<<<<< HEAD
 </html>
 >>>>>>> main
+=======
+</html>
+>>>>>>> bambang_422023005

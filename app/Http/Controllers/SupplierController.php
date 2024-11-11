@@ -56,10 +56,14 @@ class SupplierController extends Controller
             return redirect()->route('supplier.index')->with(['success' => 'Data Berhasil Disimpan!']);
         }  catch (\Exception $e) {
 <<<<<<< HEAD
+<<<<<<< HEAD
         return redirect()->route('suppliers.index')->with(['error' => 'Failed to upload image.']);        
 =======
         return redirect()->route('supplier.index')->with(['error' => 'Failed to upload image.']);        
 >>>>>>> main
+=======
+        return redirect()->route('suppliers.index')->with(['error' => 'Failed to upload image.']);        
+>>>>>>> bambang_422023005
         }
     }
 
@@ -166,6 +170,9 @@ class SupplierController extends Controller
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> bambang_422023005
 }
 =======
 }
