@@ -8,13 +8,15 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        return User::all();
-    }
+        public function home()
+        {
+            return view('user.home'); 
+        }
+
 
     /**
      * Store a newly created resource in storage.

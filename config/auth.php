@@ -40,6 +40,21 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'user' => [
+        'driver' => 'session',
+        'provider' => 'users',
+    ],
+        
+        'admin' => [
+        'driver' => 'session',
+        'provider' => 'admins', // Provider ini merujuk ke model admin
+    ],
+    
+    'api' => [
+        'driver' => 'token',
+        'provider' => 'users',
+    ],
     ],
 
     /*
@@ -63,6 +78,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
+        ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class, // Gantilah dengan model Admin Anda
         ],
 
         // 'users' => [
