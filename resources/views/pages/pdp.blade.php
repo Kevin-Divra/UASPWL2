@@ -1,14 +1,69 @@
 @extends('layouts.app-public')
 @section('title', 'Product Detail')
 @section('content')
+
+<style>
+    .product-image img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto; /* Gambar di tengah */
+    }
+
+    .product-title {
+        font-size: 36px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .product-price {
+        font-size: 24px;
+        color: #555;
+        margin-bottom: 15px;
+    }
+
+    .product-description {
+        font-size: 16px;
+        color: #777;
+        margin-bottom: 20px;
+    }
+
+    .btn-order {
+        display: block;
+        width: 500px;
+        padding: 15px;
+        text-align: center;
+        background-color: #000;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        margin-top: 300px; /* Jarak besar dari elemen sebelumnya */
+    }
+
+    .container {
+        padding-top: 50px;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+</style>
+
+</style>
+
+
+
+</style>
 <div class="site-wrapper-reveal">
 
     <div class="single-product-wrap section-space--pt_90 border-bottom pb-5 mb-5">
         <div class="container">
             <div class="row">
-                <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12">
-
-                    <!-- Product Details Left -->
+               <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12">
                     <div class="product-details-left">
                         <div class="product-details-images-2 slider-lg-image-2">
 
@@ -18,7 +73,7 @@
                                         <img src="{{asset('assets/images/product/single-product-01.webp')}}" class="img-fluid product-img-main-src" alt="">
                                     </a>
                                 </div>
-                            </div>
+                            </div> 
                             <div class="easyzoom-style">
                                 <div class="easyzoom easyzoom--overlay">
                                     <a href="{{asset('assets/images/product/single-product-02.webp')}}" class="poppu-img">
@@ -44,90 +99,24 @@
                         </div>
                         <div class="product-details-thumbs-2 slider-thumbs-2">
                             <div class="sm-image"><img src="{{asset('assets/images/product/small/1-100x100.webp')}}" alt="product image thumb" class="product-img-main-src"></div>
-                            <div class="sm-image"><img src="{{asset('assets/images/product/small/2-100x100.webp')}}" alt="product image thumb"></div>
-                            <div class="sm-image"><img src="{{asset('assets/images/product/small/3-100x100.webp')}}" alt="product image thumb"></div>
-                            <div class="sm-image"><img src="{{asset('assets/images/product/small/4-100x100.webp')}}" alt="product image thumb"></div>
                         </div>
                     </div>
                     <!--// Product Details Left -->
                 </div>
                 <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12">
-                    <div class="product-details-content">
+             <div class="product-details-content">
+             <h1 class="font-weight--reguler mb-10" id="product-Nama">iPhone 13</h1>
+            <h3 class="price" id="product-price">$98</h3>
 
-                        <h5 class="font-weight--reguler mb-10" id="product-Nama"></h5>
-                        <div class="quickview-ratting-review mb-10">
-                            <div class="quickview-ratting-wrap">
-                                <div class="quickview-ratting" id="product-review-stars"></div>
-                                <a href="#" id="product-review-body-count"></a>
-                            </div>
-                        </div>
-                        <h3 class="price" id="product-price"></h3>
+            <!-- Deskripsi Produk -->
+            <div class="quickview-peragraph mt-10">
+            <p id="product-description">Sleek and Stylish Fan-Favorite iPhone, Designed for Everyday Use</p>
+             </div>
 
-                        <div class="stock mt-10" id="product-status-stock"></div>
-
-                        <div class="quickview-peragraph mt-10"><p id="product-description"></p></div>
-
-
-                        <div class="quickview-action-wrap mt-30">
-                            <div class="quickview-cart-box">
-                                <div class="quickview-quality product-add-to-cart">
-                                    <div class="cart-plus-minus">
-                                        <input class="cart-plus-minus-box" type="text" name="qtybutton" value="0">
-                                    </div>
-                                </div>
-                                <div class="text-color-primary product-add-to-cart-is-disabled" style="display:none;font-size:10px">
-                                    You may cant buy this item now, but keep it on your wishlist so we can remind you when in stock
-                                </div>
-                                <div class="quickview-button">
-                                    <div class="quickview-cart button product-add-to-cart">
-                                        <button type="button" class="btn--lg btn--black font-weight--reguler text-white">
-                                            Add to cart
-                                        </button>
-                                    </div>
-                                    <div class="quickview-wishlist button">
-                                        <a title="Add to wishlist" href="#"><i class="icon-heart"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="product_meta mt-30">
-                            <div class="posted_in item_meta">
-                                <span class="label">size: </span>
-                                <span id="product-size" class="text-color-primary"></span>
-                            </div>
-                            <div class="tagged_as item_meta">
-                                <span class="label">Tag: </span>
-                                <span id="product-tags"></span>
-                            </div>
-                        </div>
-
-                        <div class="product_socials section-space--mt_60">
-                            <span class="label">Share this items :</span>
-                            <ul class="helendo-social-share socials-inline">
-                                <li>
-                                    <a class="share-facebook helendo-facebook" href="#" target="_blank">
-                                        <i class="social_facebook"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="share-twitter helendo-twitter" href="#" target="_blank">
-                                        <i class="social_twitter"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="share-instagram helendo-instagram" href="#" target="_blank">
-                                        <i class="social_instagram"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
-                </div>
+         <!-- Tombol Order -->
+            <button type="button" class="btn-order">Order</button>
             </div>
-
+    
         </div>
     </div>
 

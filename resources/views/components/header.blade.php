@@ -1,32 +1,43 @@
 <!-- header -->
+< <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+ </head>
+ <body>
+    <style>
+        .top-banner {
+    background-color: #977450; /* Warna coklat muda */
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+}
+    </style>
+    <div class="top-banner">
+    Extended Warranty for Peace of Mind After Your Purchase
+  </div>
+ 
 <div class="header-area header-area--default bg-white">
-    <!-- Header Bottom Wrap Start -->
+   
     <header class="header-area   header-sticky">
         <div class="container-fluid container-fluid--cp-100">
-            <div class="row">
-                <div class="col-lg-12 d-none d-md-block">
-                    <div class="top-logo-area">
-                        <div class="logo text-md-center">
-                            <a href="{{route('home')}}"><img src="{{asset('assets/images/logo/logo.png')}}" alt="logo" style="width:40%"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div class="row align-items-center">
                 <div class="col-lg-3 col-lg-3 col-6">
                     <div class="header-right-items content__hidden d-none d-md-block">
-                        <span class="phone-number font-lg-p" title="Call us for fast delivery">
-                            <a href="#cfd"><i class="icon-telephone"></i>&nbsp;&nbsp;<small class="text-color-primary"><b>+(62) 80742341390</b></small></a>
-                        </span>
+                    <small class="text-color-primary"><b>allbirds</b></small></a>
                     </div>
                     <div class="logo__hidden text-start">
-                        <a href="{{route('home')}}"><img src="{{asset('assets/images/logo/logo.png')}}" alt="" style="height:40px"></a>
+                    <small class="text-color-primary"><b>allbirds</b></small></a>
                     </div>
                 </div>
 
                 <div class="col-lg-6 col-lg-6  d-none d-lg-block">
-                    <!-- navigation menu -->
+                 
                     <div class="header__navigation d-none d-lg-block">
                         <nav class="navigation-menu">
                             <ul class="justify-content-center">
@@ -45,15 +56,13 @@
                     <div class="header-right-side text-end">
                         <div class="header-right-items d-none d-md-block">
                             <a href="#wishlist" class="header-cart">
-                                <i class="icon-heart"></i>
-                                <span class="item-counter">3</span>
+                            <i class="fas fa-search"></i>
                             </a>
                         </div>
 
                         <div class="header-right-items">
                             <a href="#minicart" class="header-cart">
-                                <i class="icon-bag2"></i>
-                                <span class="item-counter">3</span>
+                            <i class="fas fa-shopping-cart"></i>
                             </a>
                         </div>
                         
@@ -167,3 +176,5 @@
         </div>
     </div>
 </div>
+</body>
+ </html>

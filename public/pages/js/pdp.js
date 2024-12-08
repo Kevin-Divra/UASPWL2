@@ -11,38 +11,37 @@ function getDataByWindowUrlKey(){
     $('.product-img-main-href').attr('href',response.data.image);
     $('.product-img-main-src').attr('src',response.data.image);
     $('#product-name').html(response.data.Nama);
-    $('#product-size').html(response.data.size);
     $('#product-price').html('IDR '+parseFloat(response.data.price).toLocaleString());
     $('#product-description').html(response.data.description);
     
-
+    
     // START -- note, unless you have these data in a database structure, here we are hardcoding them for display purposes
       // review
-      let stars = randomIntFromInterval(1,5);
-      template = '';
-      for (let index = 0; index < 5; index++) {
-        template += '<i class="'+(index<stars?'yellow':'')+' icon_star"></i>';
-      }
-      $('#product-review-stars').html(template);
-      $('#product-review-body-count').html(randomIntFromInterval(1,1000)+' customer review');
+    //  let stars = randomIntFromInterval(1,5);
+     // template = '';
+     // for (let index = 0; index < 5; index++) {
+      //  template += '<i class="'+(index<stars?'yellow':'')+' icon_star"></i>';
+      //}
+     // $('#product-review-stars').html(template);
+     // $('#product-review-body-count').html(randomIntFromInterval(1,1000)+' customer review');
       // status stock
-      let statusStock = randomIntFromInterval(0,1);
-      $('#product-status-stock').addClass(statusStock?'in-stock':'out-of-stock');
-      $('#product-status-stock').html(statusStock?'<p>Available: <span>In stock</span></p>':'<p>Available: <span>Out of stock</span></p>');
-      if(!statusStock){
-        $('.product-add-to-cart').hide();
-        $('.product-add-to-cart-is-disabled').show();
-      }
+      //let statusStock = randomIntFromInterval(0,1);
+      // $('#product-status-stock').addClass(statusStock?'in-stock':'out-of-stock');
+      // $('#product-status-stock').html(statusStock?'<p>Available: <span>In stock</span></p>':'<p>Available: <span>Out of stock</span></p>');
+      // if(!statusStock){
+      // $('.product-add-to-cart').hide();
+      //  $('.product-add-to-cart-is-disabled').show();
+     // }
       // tag
-      let collectionOfTag = ['pakaian','mainan','peralatan mandi','popok','perlengkapan bepergian','perlengkapan tidur','peralatan menyusui','perlengkapan ganti popok'];
-      let selectedTags    = collectionOfTag.sort(() => .5 - Math.random()).slice(0, 4); // only get 4, randomly, from collectionOfTag
-      template = '';
-      for (let index = 0; index < selectedTags.length; index++) {
-        template += '<a href="#">'+selectedTags[index]+'</a>'+(index!=selectedTags.length-1?', ':'');
+      // let collectionOfTag = ['pakaian','mainan','peralatan mandi','popok','perlengkapan bepergian','perlengkapan tidur','peralatan menyusui','perlengkapan ganti popok'];
+      // let selectedTags    = collectionOfTag.sort(() => .5 - Math.random()).slice(0, 4); // only get 4, randomly, from collectionOfTag
+      //template = '';
+      // for (let index = 0; index < selectedTags.length; index++) {
+        //template += '<a href="#">'+selectedTags[index]+'</a>'+(index!=selectedTags.length-1?', ':'');
 
-      }
-      $('#product-tags').html(template);
-    // END ----
+      //}
+     // $('#product-tags').html(template);
+    // END ---->
   })
   .catch(function (error) {
     console.log('[ERROR] response..',error.code);
