@@ -209,24 +209,29 @@ class TransactionController extends Controller
     }
 
 
-    public function sendEmail($to, $id)
-    {
-        $transaksi_penjualan = new Transaction;
-        $data = $transaksi_penjualan->get_transaction()->where("transaksi_penjualan.id", $id)->get();
-
-        $total_harga['transaksi'] = 0;
-        foreach ($data as $value) {
-            $total_harga['transaksi'] += $value->total_transaction; 
+    public function sendEmail($to, $id){
+        try {
+            $transaction = new Transaction;
+            $data = $transaction->get_transaction()->where('transaksi_penjualan.id', $id)->firstOrFail();
+    
+            $total_harga['transaksi'] = $data->total_transaction;
+            
+            $transaksi = [
+                'data' => $data,
+                'total_harga' => $total_harga
+            ];
+    
+            Mail::send('transactions.show', $transaksi, function ($message) use ($to, $data, $total_harga) {
+                $message->to($to)
+                    ->subject('Transaksi Details: ' . $data->email_pembeli . ' dengan Total tagihan Rp ' . number_format($total_harga['transaksi'], 2, ',', '.'));
+            });
+    
+            return response()->json(['message' => 'Email sent successfully!']);
+            
+        } catch (\Exception $e) {
+            Log::error('Failed to send email: ' . $e->getMessage());
+    
+            return response()->json(['message' => 'Failed to send email. Please try again later.'], 500);
         }
-
-        $transaksi_ = [
-            'data' => $data,
-            'total_harga' => $total_harga
-        ];
-        
-        Mail::send('transactions.show', $transaksi_, function ($message) use ($to, $data, $total_harga) {
-            $message->to($to)
-                ->subject("Transaksi Details: {$data[0]->email_pembeli} - Total Tagihan RP " . number_format($total_harga['transaksi'], 2, ',', '.') . ".");
-        }); 
     }
 }
