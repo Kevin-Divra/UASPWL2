@@ -1,127 +1,256 @@
-@extends('layouts.app-public')
-@section('title', 'Home')
-@section('content')
-    <div class="site-wrapper-reveal">
-        <div class="hero-box-area">
-            <div class="countainer">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!-- Hero Slider Area Start -->
-                        <div class="hero-area" id="product-preview">
-                        </div>
-                        <!-- Hero Slider Area End -->
-                    </div>
-                </div>
-            </div>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Home</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body>
 
-        <div class="about-us-area section-space--ptb_120">
-            <div class="countainer">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="about-us-content_6 text-center">
-                            <h2>VINN&nbsp;&nbsp;Sport</h2>
-                            <p>
-                                <small>
-                                Welcome to the best sports store! We offer a wide range of products from top brands designed to support every step of your journey to success. Find the perfect gear for every sport.Stay at the top of your game with the latest and most innovative products from our store. We pride ourselves on offering the newest technology and best designs to ensure you get the most out of every workout and competition.
-                                </small>
-                            </p>
-                            <P class="mt-5">Unleash Your Potential with
-                                <span class="text-color-primary"> Premium Sports Equipment!</span>
-                            </P>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> 
+<style>
+    /* ========== Global Styles ========== */
+    body {
+        margin: 0;
+        font-family: 'Roboto', sans-serif;
+        background-color: #F6F6F6;
+        color: #333;
+    }
+    a {
+        text-decoration: none;
+    }
 
-        <!-- Banner Video Area Start -->
-        <div class="banner-video-area overflow-hidden">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="banner-video-box">
-                            <img src="https://i.pinimg.com/564x/43/dd/44/43dd446a07af6774a82678a1346b2491.jpg" alt="">
-                            <div class="video-icon">
-                                <a href="https://www.youtube.com/embed/KmhJN19qCQ4" class="popup-youtube"><i class="linear-ic-play"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Banner Video Area End -->
+    /* ========== Navbar Styles ========== */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #A97D52;
+        padding: 15px 7%;
+        color: #fff;
+    }
+    .navbar .logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+    }
+    .navbar a {
+        color: #fff;
+        margin: 0 15px;
+        font-size: 0.95rem;
+    }
+    .navbar a:hover {
+        color: #FFD700;
+    }
 
-        <!-- Our Brand Area Start -->
-        <div class="our-brand-area section-space--pb_90">
-            <div class="container">
-                <div class="brand-slider-active">
-                    @php
-                        $partner_count = 8;
-                    @endphp
-                    @for($i=1;$i<=$partner_count;$i++)
-                        <div class="col-lg-12">
-                            <div class="single-brand-item">
-                                <a href="#"><img src="assets/images/brand/partnerb{{ $i }}.jpg" class="img-fluid" alt="Partner Images"></a>
-                            </div>
-                        </div>
-                    @endfor
-                </div>
-            </div>
-        </div>
-        <!-- Our Brand Area End -->
+    /* ========== Hero Section ========== */
+    .hero-section {
+        background: url('https://via.placeholder.com/1200x500') no-repeat center/cover;
+        text-align: center;
+        padding: 100px 20px;
+        color: #fff;
+    }
+    .hero-section h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+    }
+    .hero-section p {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+    .hero-section button {
+        background-color: #FFD700;
+        color: #333;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.9rem;
+    }
+    .hero-section button:hover {
+        background-color: #FFB800;
+    }
 
-        <!-- Our Member Area Start -->
-        <div class="our-member-area section-space--pb_120">
+    /* ========== Categories Section ========== */
+    .categories {
+        display: flex;
+        justify-content: space-between;
+        padding: 50px 7%;
+    }
+    .category-card {
+        background-color: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+    .category-card:hover {
+        transform: translateY(-5px);
+    }
+    .category-card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+    }
+    .category-card h3 {
+        padding: 15px 0;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="member--box">
-                            <div class="row align-items-center">
-                                <div class="col-lg-5 col-md-4">
-                                    <div class="section-title small-mb__40 tablet-mb__40">
-                                        <h4 class="section-title">Join the community!</h4>
-                                        <p>Become one of the member and get discount 50% off</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-7 col-md-8">
-                                    <div class="member-wrap">
-                                        <form action="#" class="member--two">
-                                            <input class="input-box" type="text" placeholder="Your email address">
-                                            <button class="submit-btn"><i class="icon-arrow-right"></i></button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Our Member Area End -->
-          
+    /* ========== Featured Products ========== */
+    .featured-products {
+        background-color: #F4F4F4;
+        padding: 50px 7%;
+    }
+    .featured-products h2 {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 40px;
+        color: #555;
+    }
+    .product-card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        text-align: center;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+    .product-card:hover {
+        transform: translateY(-5px);
+    }
+    .product-card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+    }
+    .product-card h3 {
+        padding: 15px 0;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+    .product-card button {
+        background-color: #8B5E3C;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 0.85rem;
+    }
+
+    /* ========== Testimonials ========== */
+    .testimonials {
+        background-color: #333;
+        color: #fff;
+        padding: 50px 7%;
+        text-align: center;
+    }
+    .testimonials h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    .testimonial-card {
+        display: inline-block;
+        background-color: #444;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 10px;
+        color: #fff;
+    }
+
+    /* ========== Footer ========== */
+    .footer {
+        background-color: #333;
+        color: #fff;
+        padding: 40px 7%;
+    }
+    .footer-columns {
+        display: flex;
+        justify-content: space-between;
+    }
+    .footer-column ul {
+        list-style: none;
+        padding: 0;
+    }
+    .footer-column ul li a {
+        color: #bbb;
+        font-size: 0.9rem;
+    }
+</style>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="logo">GGStore</div>
+    <div>
+        <a href="#categories">Categories</a>
+        <a href="#products">Products</a>
+        <a href="/user/profile">Profile</a>
     </div>
-@endsection
-@section('addition_css')
-@endsection
-@section('addition_script')
-    <script src="{{asset('pages/js/home.js')}}"></script>
-@endsection
+</nav>
 
+<!-- Hero Section -->
+<section class="hero-section">
+    <h1>Push Your Limit</h1>
+    <p>Explore exclusive products and deals curated just for you</p>
+    <div>
+        <a href="/shop">Shop Now</a>
+    </div>
+</section>
 
+<!-- Categories -->
+<section class="categories" id="categories">
+    <div class="category-card">
+        <img src="https://via.placeholder.com/300x200" alt="Smartphone">
+        <h3>Smartphones</h3>
+    </div>
+    <div class="category-card">
+        <img src="https://via.placeholder.com/300x200" alt="Laptops">
+        <h3>Laptops</h3>
+    </div>
+    <div class="category-card">
+        <img src="https://via.placeholder.com/300x200" alt="Headphones">
+        <h3>Headphones</h3>
+    </div>
+</section>
 
+<!-- Featured Products -->
+<section class="featured-products" id="products">
+    <h2>Our Best Sellers</h2>
+    <div class="product-card">
+        <img src="https://via.placeholder.com/300x200" alt="Product 1">
+        <h3>Product 1</h3>
+        <button>Buy Now</button>
+    </div>
+    <div class="product-card">
+        <img src="https://via.placeholder.com/300x200" alt="Product 2">
+        <h3>Product 2</h3>
+        <button>Buy Now</button>
+    </div>
+</section>
 
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-columns">
+        <div class="footer-column">
+            <h3>Contact Us</h3>
+            <ul>
+                <li><a href="#">Email</a></li>
+                <li><a href="#">Phone</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#products">Products</a></li>
+            </ul>
+        </div>
+    </div>
+    <p>&copy; 2024 MyStore. All Rights Reserved.</p>
+</footer>
 
-
-
-
-
-
-
-
-
-
-
-
-    
+</body>
+</html>

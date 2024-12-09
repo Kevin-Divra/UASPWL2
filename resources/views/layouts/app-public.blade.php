@@ -8,7 +8,7 @@
         <meta name="keywords" content="ecommerce,sport">
         <meta name="author" content="422023023-kevin">
 
-        <title>@yield('title') | 422023023-kevin</title>
+        <title>@yield('title') | GG-ECOMMERCE</title>
         <link rel="icon" type="image/x-icon" href="{{asset('assets/images/favicon.ico')}}">
         <!-- BEGIN CSS Assets-->
         <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendor/bootstrap.min.css')}}">

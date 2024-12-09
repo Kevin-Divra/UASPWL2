@@ -12,10 +12,20 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-        public function home()
-        {
-            return view('user.home'); 
-        }
+    public function index()
+    {
+        return view('user.home'); // Pastikan path file Blade sudah benar
+    }
+
+    public function profile()
+    {
+        return view('user.profile'); // Pastikan path file Blade sudah benar
+    }
+
+    public function invoice()
+    {
+        return view('layouts.invoice'); // Pastikan path file Blade sudah benar
+    }
 
 
     /**
