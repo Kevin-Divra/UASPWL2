@@ -90,7 +90,7 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="product_category_id">Product Category</label>
+                        <label for="product_category_id">PRODUCT CATEGORY</label>
                         <select class="form-control" id="product_category_id" name="product_category_id">
                             <option value="">-- Select Category Product --</option>
                             @foreach ($data['categories'] as $category)
@@ -100,23 +100,6 @@
                             @endforeach
                         </select>
                         @error('product_category_id')
-                            <div class="alert alert-danger mt-2">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label for="supplier_id">Supplier</label>
-                        <select class="form-control" id="supplier_id" name="supplier_id">
-                            <option value="">-- Select Supplier --</option>
-                            @foreach ($data['suppliers'] as $supplier)
-                                <option value="{{ $supplier->id }}" @if(old('supplier_id', $data['product']->supplier_id) == $supplier->id) selected @endif>
-                                    {{ $supplier->supplier_name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('supplier_id')
                             <div class="alert alert-danger mt-2">
                                 {{ $message }}
                             </div>

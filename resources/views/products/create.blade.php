@@ -101,51 +101,41 @@
                             @csrf
                             <div class="form-group">
                                 <label>IMAGE</label>
-                                <input type="file" class="form-control" name="image">
+                                <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
                             </div>
 
                             <div class="form-group">
-                                <label for="product_category_id">Product Category</label>
+                                <label for="product_category_id">PRODUCT CATEGORY</label>
                                 <select class="form-control" id="product_category_id" name="product_category_id">
                                     <option value="">-- Select Category Product --</option>
                                     @foreach ($data['categories'] as $category)
-                                        <option value="{{ $category->id }}">{{ $category->product_category_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="id_supplier">Supplier</label>
-                                <select class="form-control" id="id_supplier" name="id_supplier">
-                                    <option value="">-- Select Supplier --</option>
-                                    @foreach ($data['suppliers'] as $supplier)
-                                        <option value="{{ $supplier->id }}">{{ $supplier->supplier_name }}</option>
+                                        <option value="{{ $category->id }}">{{ ucwords($category->product_category_name) }}</option>
                                     @endforeach
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label>TITLE</label>
-                                <input type="text" class="form-control" name="title" placeholder="Enter Product Title">
+                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" placeholder="Enter Product Title">
                             </div>
 
                             <div class="form-group">
                                 <label>DESCRIPTION</label>
-                                <textarea class="form-control" name="description" rows="4" placeholder="Enter Product Description"></textarea>
+                                <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="4" placeholder="Enter Product Description"></textarea>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>PRICE</label>
-                                        <input type="number" class="form-control" name="price" placeholder="Enter Product Price">
+                                        <input type="number" class="form-control @error('price') is-invalid @enderror" name="price" placeholder="Enter Product Price">
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>STOCK</label>
-                                        <input type="number" class="form-control" name="stock" placeholder="Enter Product Stock">
+                                        <input type="number" class="form-control @error('stock') is-invalid @enderror" name="stock" placeholder="Enter Product Stock">
                                     </div>
                                 </div>
                             </div>

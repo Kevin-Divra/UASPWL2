@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Edit Transaction</title>
+    <title>Edit Order</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -77,35 +77,22 @@
 <body>
 
     <div class="container mt-5 mb-5">
-        <h3>Edit Transaction</h3>
+        <h3>Edit Order</h3>
         <div class="card border-0 shadow-sm rounded">
             <div class="card-body">
-                <form id="transactionForm" action="{{ route('transaction.update', $data['transactions']->id) }}" method="POST" enctype="multipart/form-data">
+                <form id="transactionForm" action="{{ route('order.update', $data['orders']->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
-                    <!-- Cashier Selection -->
                     <div class="form-group mb-3">
-                        <label for="nama_kasir_id">Cashier Name</label>
-                        <select class="form-control" id="nama_kasir_id" name="nama_kasir_id">
-                            <option value="">-- Select Cashier --</option>
-                            @foreach ($data['cashiers'] as $cashier)
-                                <option value="{{ $cashier->id }}" {{ $cashier->id == $data['transactions']->id_kasir ? 'selected' : '' }}>
-                                    {{ ucwords($cashier->nama_kasir) }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label for="email_pembeli">Buyer Email</label>
-                        <input type="email" class="form-control" id="email_pembeli" name="email_pembeli" value="{{ old('email_pembeli', $data['transactions']->email_pembeli) }}" required>
+                        <label for="buyer_email">Buyer Email</label>
+                        <input type="email" class="form-control" id="buyer_email" name="buyer_email" value="{{ old('buyer_email', $data['orders']->buyer_email) }}" required>
                     </div>
 
 
                     <!-- Product container for dynamic products -->
                     <div id="product-container">
-                        @foreach (explode(', ', $data['transactions']->product_names) as $index => $productName)
+                        @foreach (explode(', ', $data['orders']->product_names) as $index => $productName)
                             <div class="product-row">
                                 <div class="row">
                                     <div class="col-md-5">
@@ -125,7 +112,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group mb-3">
                                             <label class="font-weight-bold">Quantity</label>
-                                            <input type="number" class="form-control" name="quantity[]" value="{{ explode(', ', $data['transactions']->jumlah_pembelian)[$index] }}" min="1" placeholder="Enter Quantity">
+                                            <input type="number" class="form-control" name="quantity[]" value="{{ explode(', ', $data['orders']->product_quantities)[$index] }}" min="1" placeholder="Enter Quantity">
                                         </div>
                                     </div>
 

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Choice</title>
     <style>
-        /* CSS untuk tombol */
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -51,17 +50,17 @@
         .choice-btn:focus {
             outline: none;
         }
+
+        .choice-form {
+            margin: 0;
+        }
     </style>
 </head>
 <body>
     <div class="login-choice-container">
-        <h2>Choose Login Type</h2>
-        <form action="{{ route('admin.login') }}" method="GET">
-            <button type="submit" class="choice-btn">Login as Admin</button>
-        </form>
-        <form action="{{ route('user.login') }}" method="GET">
-            <button type="submit" class="choice-btn">Login as User</button>
-        </form>
+        <h2>Welcome!</h2>
+        <button onclick="window.location.href='{{ route('login') }}'" class="choice-btn">Login</button>
+        <button onclick="window.location.href='{{ route('register') }}'" class="choice-btn">Register</button>
     </div>
 </body>
 </html>

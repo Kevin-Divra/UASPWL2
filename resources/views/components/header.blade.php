@@ -1,5 +1,5 @@
 <!-- header -->
-< <!DOCTYPE html>
+<!DOCTYPE html>
  <html lang="en">
  <head>
     <meta charset="UTF-8">
@@ -45,7 +45,7 @@
                                     <a href="{{route('home')}}"><span>Home</span></a>
                                 </li>
                                 <li>
-                                    <a href="{{route('plp')}}"><span>Shop</span></a>
+                                    <a href="{{route('shop')}}"><span>Shop</span></a>
                                 </li>
                             </ul>
                         </nav>
