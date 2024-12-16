@@ -12,6 +12,7 @@
                             <div class="col-12">
                                 <ul class="page-pagination text-center mt-40" id="product-list-pagination">
                                 
+                                
                                 </ul>
                             </div>
                         </div>

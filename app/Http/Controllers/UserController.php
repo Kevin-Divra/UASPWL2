@@ -32,6 +32,29 @@ class UserController extends Controller
         return view('user.profile', compact('user'));
     }
 
+    public function updateProfile(Request $request)
+    {
+        // Validate the request data
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'password' => 'nullable|min:6|confirmed',
+        ]);
+
+        // Get the authenticated user
+        $user = Auth::user();
+        $user->name = $validated['name'];
+
+        if ($validated['password']) {
+            $user->password = Hash::make($validated['password']);
+        }
+
+        // Save the updated user data
+        $user->save();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Profile updated successfully.');
+    }
+
     public function updateAddress(Request $request)
     {
         $request->validate([

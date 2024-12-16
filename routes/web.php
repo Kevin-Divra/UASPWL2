@@ -24,11 +24,12 @@ Route::get('/order/send-email/{to}/{id}', [OrderController::class, 'sendEmail'])
 //user side
 Route::get('/user/home', [UserController::class, 'index'])->name('user.home');
 Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
+Route::put('/profile/update', [UserController::class, 'updateProfile'])->name('profile.update');
 Route::get('/home', [UserController::class, 'index'])->name('home');
 Route::post('/profile/update-address', [UserController::class, 'updateAddress'])->name('profile.updateAddress');
 
 
-Route::get('/plp', [ProductController::class, 'plp'])->name('plp');
+// Route::get('/plp', [ProductController::class, 'plp'])->name('plp');
 Route::get('/shop', function () {
     return view('user.shop');
 })->name('shop');

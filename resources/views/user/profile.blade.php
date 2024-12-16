@@ -339,38 +339,73 @@
         <div class="row">
             <!-- Edit Profile -->
             <div class="col-md-6">
-                <form>
-                    <h5 class="form-title">Edit Profile</h5>
-                    <div class="mb-3">
-                        <label for="username" class="form-label">New Username</label>
-                        <input type="text" class="form-control" id="username" />
+                <form method="POST" action="{{ route('profile.update') }}">
+                    @csrf
+                    @method('PUT')
+
+                    <!-- Name Input -->
+                    <div class="input-group">
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" id="name" value="{{ old('name', auth()->user()->name) }}" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">New Email</label>
-                        <input type="email" class="form-control" id="email" />
+
+                    <!-- Email Input -->
+                    <div class="input-group">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" id="email" value="{{ old('email', auth()->user()->email) }}" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">New Password</label>
-                        <input type="password" class="form-control" id="password" />
+
+                    <!-- Password Input -->
+                    <div class="input-group">
+                        <label for="password">New Password:</label>
+                        <input type="password" name="password" id="password">
+                    </div>
+
+                    <!-- Confirm Password Input -->
+                    <div class="input-group">
+                        <label for="password_confirmation">Confirm New Password:</label>
+                        <input type="password" name="password_confirmation" id="password_confirmation">
+                    </div>
+
+                    <!-- Error Handling -->
+                    @if ($errors->any())
+                        <div class="error-message">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <!-- Submit Button -->
+                    <div>
+                        <button type="submit" class="btn">Update Profile</button>
                     </div>
                 </form>
+
             </div>
             <!-- Edit Address -->
             <div class="col-md-6">
-                <form>
+                <form action="{{ route('profile.updateAddress') }}" method="POST">
+                    @csrf
                     <h5 class="form-title">Edit Address</h5>
+
                     <div class="mb-3">
                         <label for="street" class="form-label">New Street</label>
-                        <input type="text" class="form-control" id="street" />
+                        <input type="text" class="form-control" id="street" name="street" value="{{ old('street', optional($user->address)->street) }}">
                     </div>
+
                     <div class="mb-3">
                         <label for="city" class="form-label">New City</label>
-                        <input type="text" class="form-control" id="city" />
+                        <input type="text" class="form-control" id="city" name="city" value="{{ old('city', optional($user->address)->city) }}">
                     </div>
+
                     <div class="mb-3">
                         <label for="pos" class="form-label">New Code POS</label>
-                        <input type="text" class="form-control" id="pos" />
+                        <input type="text" class="form-control" id="pos" name="post_code" value="{{ old('post_code', optional($user->address)->post_code) }}">
                     </div>
+
+                    <button type="submit" class="btn btn-dark">Save Address</button>
                 </form>
             </div>
         </div>
