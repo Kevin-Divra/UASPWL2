@@ -1,36 +1,37 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\SupplierController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+// login regis
+Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
 
+//admin side
 Route::resource('/products', ProductController::class);
+Route::resource('/order', OrderController::class);
+Route::get('/order/send-email/{to}/{id}', [OrderController::class, 'sendEmail'])->name('order.send-email');
 
+
+//user side
 Route::get('/user/home', [UserController::class, 'index'])->name('user.home');
 Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
 Route::get('/home', [UserController::class, 'index'])->name('home');
-Route::resource('/supplier', SupplierController::class);
-Route::resource('/transaction', TransactionController::class);
+Route::post('/profile/update-address', [UserController::class, 'updateAddress'])->name('profile.updateAddress');
 
-Route::get('/transaction/send-email/{to}/{id}', [TransactionController::class, 'sendEmail'])->name('transaction.send-email');
-
-// Login routes for admin and user
-Route::get('/login/admin', [AuthController::class, 'showAdminLoginForm'])->name('admin.login');
-Route::post('/login/admin', [AuthController::class, 'adminLogin']);
-Route::get('/login/user', [AuthController::class, 'showUserLoginForm'])->name('user.login');
-Route::post('/login/user', [AuthController::class, 'userLogin']);
 
 Route::get('/plp', [ProductController::class, 'plp'])->name('plp');
 Route::get('/shop', function () {
-    return view('user.plp');
-})->name('plp');
+    return view('user.shop');
+})->name('shop');
 
 Route::get('/shop/details-product', function () {
     return view('user.pdp');

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard - Supplier</title>
+    <title>Data Orders</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -31,15 +31,15 @@
         .sidebar a {
             display: flex;
             align-items: center;
-            justify-content: center; /* Untuk menempatkan ikon dan teks di tengah */
-            gap: 10px; /* Memberikan jarak antara ikon dan teks */
+            justify-content: center; 
+            gap: 10px; 
             padding: 15px;
             color: #585656;
             text-decoration: none;
             font-size: 18px;
         }
         .sidebar a i {
-            font-size: 20px; /* Tambahkan jarak antara ikon dan teks */
+            font-size: 20px; 
         }
         .sidebar a:hover {
             background-color: #2F609C;
@@ -48,13 +48,13 @@
         .sidebar h2 {
             color: #585656;
             text-align: center;
-            background-color: #FFD700; /* Yellow background */
-            padding: 10px; /* Padding for internal spacing */
-            margin: 0; /* Remove the margin */
-            height: 100px; /* Set an appropriate height to extend to the top */
+            background-color: #FFD700; 
+            padding: 10px; 
+            margin: 0; 
+            height: 100px; 
             display: flex;
-            align-items: center; /* Align content vertically */
-            justify-content: center; /* Align content horizontally */
+            align-items: center; 
+            justify-content: center;
             border-radius: 5px;
         }
         .main-content {
@@ -255,63 +255,93 @@
     <div class="sidebar">
         <h2><i class="fas fa-tachometer-alt" style="margin-right: 10px"></i> Dashboard</h2>
         <a href="{{ url('/products') }}"><i class="fas fa-box"></i> Products</a>
-        <a href="{{ url('/supplier') }}"><i class="fas fa-truck"></i> Suppliers</a>
-        <a href="{{ url('/transaction') }}"><i class="fas fa-money-bill-wave"></i> Transaction</a>
+        <a href="{{ url('/order') }}"><i class="fas fa-money-bill-wave"></i> Orders</a>
     </div>
+
 
     <div class="main-content">
         <div class="table-responsive">
             <div class="table-wrapper">
                 <div class="table-title">
-                    <h2>Supplier Management</h2>
-                    <a href="{{ route('supplier.create') }}" class="btn btn-md btn-success mb-3">Add Supplier</a>
+                    <h2>Data Order 101</h2>
+                    <a href="{{ route('order.create') }}" class="btn btn-md btn-success mb-3">Add Order </a>
                 </div>
                 <table class="table table-striped table-hover table-bordered">
                     <thead>
                         <tr>
-                        <th scope="col">SUPPLIER NAME</th>
-                                <th scope="col">SUPPLIER ADDRESS</th>
-                                <th scope="col">PIC SUPPLIER</th>
-                                <th scope="col">NO. HP PIC SUPPLIER</th>
-                                <th scope="col" style="width: 20%">ACTIONS</th>
+                            <th >ORDER DATE</th>
+                            <th >BUYER EMAIL</th>
+                            <th >PRODUCT NAME</th>
+                            <th >PRICE</th>
+                            <th >UNIT</th>
+                            <th >SUBTOTAL</th>
+                            <th >TOTAL</th>
+                            <th >ACTIONS</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($suppliers as $supplier)
+                    @forelse ($orders as $transaction)
+                        @php
+                            $products = explode(', ', $transaction->product_names);
+                            $prices = explode(', ', $transaction->product_prices);
+                            $quantities = explode(', ', $transaction->product_quantities);
+                            $rowCount = count($products);
+                            $subtotal = 0; // Initialize subtotal for the transaction
+                        @endphp
+                        
+                        @foreach ($products as $index => $product_name)
+                            @php
+                                $price = (float)$prices[$index]; // Cast price to float
+                                $quantity = (int)$quantities[$index]; // Cast quantity to int
+                                $subtotal = $price * $quantity;
+                            @endphp
                             <tr>
-                                <td>{{ ucwords($supplier->supplier_name) }}</td>
-                                <td>{{ ucwords($supplier->alamat_supplier) }}</td>
-                                <td>{{ ucwords($supplier->pic_supplier) }}</td>
-                                <td>{{ ucwords($supplier->no_hp_pic_supplier) }}</td>
-                                <td>
-                                    <form id="delete-form-{{ $supplier->id }}" action="{{ route('supplier.destroy', $supplier->id) }}" method="POST" style="display: inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="{{ route('supplier.show', $supplier->id) }}" class="view" data-toggle="tooltip" title="View">
-                                            <i class="material-icons">&#xE417;</i>
-                                        </a>
-                                        <a href="{{ route('supplier.edit', $supplier->id) }}" class="edit" data-toggle="tooltip" title="Edit">
-                                            <i class="material-icons">&#xE254;</i>
-                                        </a>
-                                        <a href="#" onclick="showDeleteConfirmation({{ $supplier->id }})" class="delete" data-toggle="tooltip" title="Delete">
-                                            <i class="material-icons">&#xE872;</i>
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="7" class="text-center">Data Suppliers belum Tersedia.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-                {{ $suppliers->links() }}
-            </div>
-        </div>        
-    </div>
+                                @if ($index === 0)
+                                    <td rowspan="{{ $rowCount }}">{{ $transaction->created_at }}</td>
+                                    <td rowspan="{{ $rowCount }}">{{ ucwords($transaction->buyer_email) }}</td>
+                                @endif
+                                <td>{{ ucwords($product_name) }}</td>
+                                <td>{{ number_format($prices[$index], 2, ',', '.') }}</td>
+                                <td>{{ number_format($quantity) }}</td>
+                                <td>{{ number_format($subtotal, 2, ',', '.') }}</td>
 
+                                @if ($index === 0)
+                                    <td rowspan="{{ $rowCount }}">{{ number_format($transaction->total_transaction, 2, ',', '.') }}</td>
+                                    <td rowspan="{{ $rowCount }}" class="text-center">
+                                        <form id="delete-form-{{ $transaction->id }}" onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('order.destroy', $transaction->id) }}" method="POST" style="display: inline;">
+                                            <a href="{{ route('order.show', $transaction->id) }}" class="view" data-toggle="tooltip" title="View">
+                                            <i class="material-icons">&#xE417;</i>
+                                            </a>
+                                            <a href="{{ route('order.edit', $transaction->id) }}" class="edit" data-toggle="tooltip" title="Edit">
+                                            <i class="material-icons">&#xE254;</i> 
+                                            </a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="#" onclick="showDeleteConfirmation({{ $transaction->id }})" class="delete" data-toggle="tooltip" title="Delete">
+                                            <i class="material-icons">&#xE872;</i>
+                                            </a>
+                                        </form>
+                                    </td>
+                                @endif
+                            </tr>
+                        @endforeach                                      
+                    @empty
+                        <div class="alert alert-danger">
+                            Data Order belum tersedia.
+                        </div>
+                    @endforelse
+                </tbody>
+                </table>
+                {{ $orders->links() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <button class="dark-mode-toggle" onclick="toggleDarkMode()"><i class="fas fa-moon"></i></button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         document.querySelectorAll('.material-icons').forEach(function(icon) {
@@ -349,19 +379,20 @@
             });
         }
 
-        @if(session('success'))
+        // message with sweetalert
+        @if (session('success'))
             Swal.fire({
-                icon: "success",
-                title: "Berhasil",
-                text: "{{ session('success') }}",
+                icon: 'success',
+                title: 'BERHASIL',
+                text: '{{ session('success') }}',
                 showConfirmButton: false,
                 timer: 2000
             });
-        @elseif(session('error'))
+        @elseif (session('error'))
             Swal.fire({
-                icon: "error",
-                title: "Gagal",
-                text: "{{ session('error') }}",
+                icon: 'error',
+                title: 'GAGAL',
+                text: '{{ session('error') }}',
                 showConfirmButton: false,
                 timer: 2000
             });

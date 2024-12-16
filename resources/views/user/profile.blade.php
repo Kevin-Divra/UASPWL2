@@ -313,9 +313,7 @@
         <div class="user-info">
             <img src="https://png.pngtree.com/png-vector/20240131/ourmid/pngtree-man-profile-account-picture-character-png-image_11577305.png" alt="Profile Picture">
             <div>
-                <h2>John Doe</h2>
-                <p>Designer | UI/UX</p>
-                <p>Passionate about creating engaging interfaces</p>
+                <h2>{{ ucwords($user->name) }}</h2>          
             </div>
         </div>
         <button type="submit">Logout</button>
@@ -323,62 +321,65 @@
     <div class="content">
         <div class="profile-info">
             <h3>Profile Info</h3>
-            <p><strong>Username:</strong> Peterr</p>
-            <p><strong>Email:</strong> Peterr@gmail.com</p>
-            <p><strong>Password:</strong> Peter123</p>
+            <p><strong>Username:</strong> {{ ucwords($user->name) }}</p>
+            <p><strong>Email:</strong> {{ ($user->email) }}</p>
         </div>
         <div class="address-info">
             <h3>Address</h3>
-            <p><strong>Street:</strong> Jl. Fatmawati No. 26, Cilandak, Jakarta, Indonesia</p>
-            <p><strong>City:</strong> Jakarta</p>
-            <p><strong>Pos Code:</strong> 14412</p>
+            @if($user->address)
+                <p><strong>Street:</strong> {{ $user->address->street }}</p>
+                <p><strong>City:</strong> {{ $user->address->city }}</p>
+                <p><strong>Pos Code:</strong> {{ $user->address->post_code }}</p>
+            @else
+                <p><em>No address provided yet.</em></p>
+            @endif
         </div>
     </div>
-        <div class="container my-4 edit-container">
-    <div class="row">
-        <!-- Edit Profile -->
-        <div class="col-md-6">
-        <form>
-            <h5 class="form-title">Edit Profile</h5>
-            <div class="mb-3">
-            <label for="username" class="form-label">New Username</label>
-            <input type="text" class="form-control" id="username" />
+    <div class="container my-4 edit-container">
+        <div class="row">
+            <!-- Edit Profile -->
+            <div class="col-md-6">
+                <form>
+                    <h5 class="form-title">Edit Profile</h5>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">New Username</label>
+                        <input type="text" class="form-control" id="username" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">New Email</label>
+                        <input type="email" class="form-control" id="email" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">New Password</label>
+                        <input type="password" class="form-control" id="password" />
+                    </div>
+                </form>
             </div>
-            <div class="mb-3">
-            <label for="email" class="form-label">New Email</label>
-            <input type="email" class="form-control" id="email" />
+            <!-- Edit Address -->
+            <div class="col-md-6">
+                <form>
+                    <h5 class="form-title">Edit Address</h5>
+                    <div class="mb-3">
+                        <label for="street" class="form-label">New Street</label>
+                        <input type="text" class="form-control" id="street" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="city" class="form-label">New City</label>
+                        <input type="text" class="form-control" id="city" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="pos" class="form-label">New Code POS</label>
+                        <input type="text" class="form-control" id="pos" />
+                    </div>
+                </form>
             </div>
-            <div class="mb-3">
-            <label for="password" class="form-label">New Password</label>
-            <input type="password" class="form-control" id="password" />
-            </div>
-        </form>
         </div>
-        <!-- Edit Address -->
-        <div class="col-md-6">
-        <form>
-            <h5 class="form-title">Edit Address</h5>
-            <div class="mb-3">
-            <label for="street" class="form-label">New Street</label>
-            <input type="text" class="form-control" id="street" />
-            </div>
-            <div class="mb-3">
-            <label for="city" class="form-label">New City</label>
-            <input type="text" class="form-control" id="city" />
-            </div>
-            <div class="mb-3">
-            <label for="pos" class="form-label">New Code POS</label>
-            <input type="text" class="form-control" id="pos" />
-            </div>
-        </form>
-        </div>
-    </div>
     <!-- Submit Button -->
-    <div class="row">
-        <div class="col-md-12 text-center">
-        <button type="submit" class="btn btn-dark btn-submit">Submit</button>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-dark btn-submit">Submit</button>
+            </div>
         </div>
-    </div>
     </div>
     <!-- Footer start -->
     <div class="footer-area-wrapper">

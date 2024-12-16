@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -19,8 +20,45 @@ class UserController extends Controller
 
     public function profile()
     {
-        return view('user.profile'); // Pastikan path file Blade sudah benar
+        $user = Auth::user(); // Get the logged-in user
+
+        if (!$user) {
+            return redirect('/login')->with('error', 'Please log in first.');
+        }
+
+        // Eager load the address (it can be null)
+        $user->load('address');
+
+        return view('user.profile', compact('user'));
     }
+
+    public function updateAddress(Request $request)
+    {
+        $request->validate([
+            'street' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'post_code' => 'required|numeric',
+        ]);
+
+        $user = Auth::user();
+
+        // If the user already has an address, update it
+        if ($user->address) {
+            $user->address->update($request->only(['street', 'city', 'post_code']));
+        } else {
+            // Otherwise, create a new address
+            UserAddress::create([
+                'id_user' => $user->id,
+                'street' => $request->street,
+                'city' => $request->city,
+                'post_code' => $request->post_code,
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Address updated successfully.');
+    }
+
+
 
     public function invoice()
     {
