@@ -15,7 +15,7 @@ class ShopController extends Controller
         $data['products'] = $product->get_product()->get();
         $data['categories'] = $product->get_category_product()->get();
         
-        return view('user.shop', compact('data'));    
+        return view('user.shop', compact('data'));
     }
 
     public function query(Request $request)

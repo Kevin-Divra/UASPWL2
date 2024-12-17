@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Product;
 use App\Models\UserAddress;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user.home'); // Pastikan path file Blade sudah benar
+        $product = new Product;
+        $data['products'] = $product->get_product()->orderBy('stock', 'desc')->take(3)->get();
+        $data['categories'] = $product->get_category_product()->get();
+        return view('user.home', compact('data')); // Pastikan path file Blade sudah benar
     }
 
     public function profile()

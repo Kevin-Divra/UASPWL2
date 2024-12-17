@@ -127,32 +127,63 @@
 <!-- Categories -->
 <section class="categories" id="categories">
     <div class="category-card">
-        <img src="https://via.placeholder.com/300x200" alt="Smartphone">
-        <h3>Smartphones</h3>
+        <a href="{{ route('user.shop.query', ['query' => '', 'category' => 'Laptop', 'sort_by' => 'title', 'sort_direction' => 'asc']) }}">
+            <img src="https://via.placeholder.com/300x200" alt="Laptop">
+            <h3>Laptops</h3>
+        </a>
     </div>
     <div class="category-card">
-        <img src="https://via.placeholder.com/300x200" alt="Laptops">
-        <h3>Laptops</h3>
+        <a href="{{ route('user.shop.query', ['query' => '', 'category' => 'Camera', 'sort_by' => 'title', 'sort_direction' => 'asc']) }}">
+            <img src="https://via.placeholder.com/300x200" alt="Camera">
+            <h3>Cameras</h3>
+        </a>
     </div>
     <div class="category-card">
-        <img src="https://via.placeholder.com/300x200" alt="Headphones">
-        <h3>Headphones</h3>
+        <a href="{{ route('user.shop.query', ['query' => '', 'category' => 'Powerbanks', 'sort_by' => 'title', 'sort_direction' => 'asc']) }}">
+            <img src="https://via.placeholder.com/300x200" alt="Powerbanks">
+            <h3>Powerbanks</h3>
+        </a>
     </div>
 </section>
+
+
 
 <!-- Featured Products -->
 <section class="featured-products" id="products">
     <h2>Our Best Sellers</h2>
-    <div class="product-card">
-        <img src="https://via.placeholder.com/300x200" alt="Product 1">
-        <h3>Product 1</h3>
-        <button>Buy Now</button>
-    </div>
-    <div class="product-card">
-        <img src="https://via.placeholder.com/300x200" alt="Product 2">
-        <h3>Product 2</h3>
-        <button>Buy Now</button>
-    </div>
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            @foreach ($data['products'] as $product)
+                <div class="col mb-5">
+                    <div class="card h-100 shadow-sm border-1 rounded-4">
+                        <!-- Product Image -->
+                        <a href="{{ route('pdp', ['id' => $product->id]) }}" class="d-block position-relative overflow-hidden">
+                            <img class="card-img-top img-fluid" 
+                                src="{{ asset('storage/images/' . $product->image) }}" 
+                                alt="{{ $product->name }}" 
+                                style="height: 250px; object-fit: cover;">
+                        </a>
+
+                        <!-- Product Details -->
+                        <div class="card-body">
+                            <h6 class="card-title fw-bold mb-1">{{ ucwords($product->title) }}</h6>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <p class="text-success fw-bold mb-0">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
+                                <p class="text-muted mb-0" style="font-size: 0.9rem;">Stock: {{ $product->stock }}</p>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="card-footer bg-transparent border-0">
+                            <form action="{{ route('user.cart.add', $product->id) }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="id_product" value="{{ $product->id }}">
+                                <button type="submit" class="btn btn-dark w-100 rounded-pill">Add to Cart</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
 </section>
 
 @endsection
