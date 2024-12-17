@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Shipping;
 use App\Models\User;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -117,18 +119,26 @@ class OrderController extends Controller
             $order->total_price = $totalPrice;
             $order->save();
     
+            // Create the payment linked to the newly created order
+            $payment = Payment::create([
+                'id_order' => $order->id,
+                'id_user' => $user->id,
+                'status' => 'ongoing', // Set payment status to pending
+            ]);
+    
             DB::commit(); // Commit the transaction
     
-            // Send email after the order is successfully created
+            // Send email after the order is successfully created (you can send the email here)
             $this->sendEmail($request->buyer_email, $order->id);
     
             return redirect()->route('order.index')->with(['success' => 'Order successfully created and stock updated!']);
-            
+    
         } catch (\Exception $e) {
             DB::rollBack(); // Rollback on error
             return redirect()->back()->withErrors(['error' => 'Failed to create order. Error: ' . $e->getMessage()]);
         }
-    }    
+    }
+    
     
 
     /**
@@ -248,9 +258,6 @@ class OrderController extends Controller
         }
     }
     
-    
-
-        
     /**
     * destroy
     * 
@@ -260,13 +267,29 @@ class OrderController extends Controller
 
     public function destroy($id): RedirectResponse
     {
+        // Find the order by ID
         $order = Order::findOrFail($id);
+        
+        // Delete the related order details
         DB::table('order_detail')->where('id_order', $order->id)->delete();
+        
+        // Delete the payment related to the order
+        $payment = Payment::where('id_order', $order->id)->first();
+        if ($payment) {
+            // Delete the related shipping based on id_payment
+            Shipping::where('id_payment', $payment->id)->delete();
+            
+            // Delete the payment
+            $payment->delete();
+        }
+        
+        // Delete the order
         $order->delete();
-
+        
+        // Redirect with success message
         return redirect()->route('order.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
-
+        
         
     private function sendEmail($to, $id){
     try {

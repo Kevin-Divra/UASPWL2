@@ -5,21 +5,22 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\ShopController;
-use App\Http\Controllers\SupplierController;
 
+// Public Routes
 Route::get('/', function () {
     return view('welcome');
 });
-// login regis
-Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [AuthController::class, 'register']);
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
 
-//admin side
+// Authentication Routes
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/register', 'showRegistrationForm')->name('register');
+    Route::post('/register', 'register');
+    Route::get('/login', 'showLoginForm')->name('login');
+    Route::post('/login', 'login');
+    Route::post('/logout', 'logout')->name('logout');
+});
+
+// Admin Side Routes
 Route::resource('/products', ProductController::class);
 Route::resource('/order', OrderController::class);
 Route::get('/order/send-email/{to}/{id}', [OrderController::class, 'sendEmail'])->name('order.send-email');
@@ -30,70 +31,45 @@ Route::get('/user/home', [UserController::class, 'index'])->name('user.home');
 Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
 Route::put('/profile/update', [UserController::class, 'updateProfile'])->name('profile.update');
 Route::get('/home', [UserController::class, 'index'])->name('home');
-Route::resource('/supplier', SupplierController::class);
-Route::resource('/transaction', TransactionController::class);
+Route::post('/profile/update-address', [UserController::class, 'updateAddress'])->name('profile.updateAddress');
 
-Route::get('/transaction/send-email/{to}/{id}', [TransactionController::class, 'sendEmail'])->name('transaction.send-email');
 
-// Login routes for admin and user
-Route::get('/login/admin', [AuthController::class, 'showAdminLoginForm'])->name('admin.login');
-Route::post('/login/admin', [AuthController::class, 'adminLogin']);
-Route::get('/login/user', [AuthController::class, 'showUserLoginForm'])->name('user.login');
-Route::post('/login/user', [AuthController::class, 'userLogin']);
-
-Route::get('/plp', [ProductController::class, 'plp'])->name('plp');
+// Route::get('/plp', [ProductController::class, 'plp'])->name('plp');
 Route::get('/shop', function () {
-    return view('user.plp');
-})->name('plp');
+    return view('user.shop');
+})->name('shop');
 
 Route::get('/shop/details-product', function () {
     return view('user.pdp');
 })->name('pdp');
+
+// Invoice Route
 Route::get('/invoice', [UserController::class, 'invoice'])->name('layouts.invoice');
 
+// use Illuminate\Support\Facades\Route;
+// use App\Http\Controllers\TransactionController;
+// use App\Http\Controllers\AuthController;
 
-// shop
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-// Route::get('/shop', [ShopController::class,  'index']->name('user.shop'));
-// Route::get('/api/products', [ShopController::class, 'fetchProducts']);
+// Route::resource('/products',  \App\Http\Controllers\ProductController::class);
+// Route::get('/user/home', [UserController::class, 'index'])->name('user.home');
+// Route::get('/user/profile', [\App\Http\Controllers\UserController::class, 'profile'])->name('user.profile');
+// Route::get('/home', [UserController::class, 'index'])->name('home');
+// Route::resource('/supplier', \App\Http\Controllers\SupplierController::class);
+// Route::resource('/transaction', TransactionController::class);
+// Route::get('/transaction/send-email/{to}/{id}', [TransactionController::class, 'sendEmail']);
 
-// Halaman utama untuk menampilkan produk di /shop
-Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
+// Route::get('/login/admin', [AuthController::class, 'showAdminLoginForm'])->name('admin.login');
+// Route::post('/login/admin', [AuthController::class, 'adminLogin']);
 
-// API untuk mengambil produk dengan AJAX di /shop/fetch-products
-Route::get('/shop/fetch-products', [ShopController::class, 'fetchProducts'])->name('shop.fetchProducts');
-
-// routes/web.php
-Route::get('/product/{id}', [ShopController::class, 'show'])->name('product.show');
-
-//chart
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
-Route::post('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
-
-Route::get('/user/cart', [CartController::class, 'index'])->name('user.cart');
-Route::get('/user/payment', [PaymentController::class, 'index'])->name('user.payment');
-
-//payment
-Route::middleware(['auth'])->group(function () {
-    Route::resource('orders', OrderController::class);  // Menggunakan resource controller
-});
-
-Route::post('/order/store', [OrderController::class, 'store'])->name('order.store');
-
-Route::post('/payment/submit', [PaymentController::class, 'submit'])->name('payment.submit');
+// Route::get('/login/user', [AuthController::class, 'showUserLoginForm'])->name('user.login');
+// Route::post('/login/user', [AuthController::class, 'userLogin']);
 
 
-Route::post('/payment', [PaymentController::class, 'initiate'])->name('payment.initiate');
-
-// Menyelesaikan pembayaran (misalnya menggunakan Stripe atau gateway lain)
-Route::post('/payment/complete', [PaymentController::class, 'complete'])->name('payment.complete');
-
-// Route untuk menuju halaman pembayaran
-Route::get('/payment', [OrderController::class, 'payment'])->name('payment');
-
-// Route untuk memproses pembayaran
-Route::post('/payment/complete', [PaymentController::class, 'complete'])->name('payment.complete');
+// Route::get('/plp', [ProductController::class, 'plp'])->name('plp');
 
 // Route::get('/layouts/invoice', [\App\Http\Controllers\UserController::class, 'invoice'])->name('layouts.invoice');
 

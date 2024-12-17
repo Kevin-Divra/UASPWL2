@@ -5,12 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Models\Payment;
 
 class Order extends Model
 {
     use HasFactory;
     protected $table = 'order';
     protected $fillable = ['id_user', 'total_price'];
+
+    public function payment()
+    {
+        return $this->hasOne(Payment::class, 'id_order');
+    }
 
     public function get_order()
     {

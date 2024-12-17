@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Commerce Home</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-</head>
-<body>
+@extends('layouts.app-public')
+@section('title', 'Home')
+@section('content')
 
 <style>
     /* ========== Global Styles ========== */
@@ -20,28 +12,6 @@
     }
     a {
         text-decoration: none;
-    }
-
-    /* ========== Navbar Styles ========== */
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #A97D52;
-        padding: 15px 7%;
-        color: #fff;
-    }
-    .navbar .logo {
-        font-size: 1.8rem;
-        font-weight: 700;
-    }
-    .navbar a {
-        color: #fff;
-        margin: 0 15px;
-        font-size: 0.95rem;
-    }
-    .navbar a:hover {
-        color: #FFD700;
     }
 
     /* ========== Hero Section ========== */
@@ -141,55 +111,9 @@
         font-size: 0.85rem;
     }
 
-    /* ========== Testimonials ========== */
-    .testimonials {
-        background-color: #333;
-        color: #fff;
-        padding: 50px 7%;
-        text-align: center;
-    }
-    .testimonials h2 {
-        font-size: 2rem;
-        margin-bottom: 20px;
-    }
-    .testimonial-card {
-        display: inline-block;
-        background-color: #444;
-        border-radius: 10px;
-        padding: 20px;
-        margin: 10px;
-        color: #fff;
-    }
 
-    /* ========== Footer ========== */
-    .footer {
-        background-color: #333;
-        color: #fff;
-        padding: 40px 7%;
-    }
-    .footer-columns {
-        display: flex;
-        justify-content: space-between;
-    }
-    .footer-column ul {
-        list-style: none;
-        padding: 0;
-    }
-    .footer-column ul li a {
-        color: #bbb;
-        font-size: 0.9rem;
-    }
 </style>
 
-<!-- Navbar -->
-<nav class="navbar">
-    <div class="logo">GGStore</div>
-    <div>
-        <a href="#categories">Categories</a>
-        <a href="#products">Products</a>
-        <a href="/user/profile">Profile</a>
-    </div>
-</nav>
 
 <!-- Hero Section -->
 <section class="hero-section">
@@ -203,54 +127,68 @@
 <!-- Categories -->
 <section class="categories" id="categories">
     <div class="category-card">
-        <img src="https://via.placeholder.com/300x200" alt="Smartphone">
-        <h3>Smartphones</h3>
+        <a href="{{ route('user.shop.query', ['query' => '', 'category' => 'Laptop', 'sort_by' => 'title', 'sort_direction' => 'asc']) }}">
+            <img src="https://via.placeholder.com/300x200" alt="Laptop">
+            <h3>Laptops</h3>
+        </a>
     </div>
     <div class="category-card">
-        <img src="https://via.placeholder.com/300x200" alt="Laptops">
-        <h3>Laptops</h3>
+        <a href="{{ route('user.shop.query', ['query' => '', 'category' => 'Camera', 'sort_by' => 'title', 'sort_direction' => 'asc']) }}">
+            <img src="https://via.placeholder.com/300x200" alt="Camera">
+            <h3>Cameras</h3>
+        </a>
     </div>
     <div class="category-card">
-        <img src="https://via.placeholder.com/300x200" alt="Headphones">
-        <h3>Headphones</h3>
+        <a href="{{ route('user.shop.query', ['query' => '', 'category' => 'Powerbanks', 'sort_by' => 'title', 'sort_direction' => 'asc']) }}">
+            <img src="https://via.placeholder.com/300x200" alt="Powerbanks">
+            <h3>Powerbanks</h3>
+        </a>
     </div>
 </section>
+
+
 
 <!-- Featured Products -->
 <section class="featured-products" id="products">
     <h2>Our Best Sellers</h2>
-    <div class="product-card">
-        <img src="https://via.placeholder.com/300x200" alt="Product 1">
-        <h3>Product 1</h3>
-        <button>Buy Now</button>
-    </div>
-    <div class="product-card">
-        <img src="https://via.placeholder.com/300x200" alt="Product 2">
-        <h3>Product 2</h3>
-        <button>Buy Now</button>
-    </div>
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            @foreach ($data['products'] as $product)
+                <div class="col mb-5">
+                    <div class="card h-100 shadow-sm border-1 rounded-4">
+                        <!-- Product Image -->
+                        <a href="{{ route('pdp', ['id' => $product->id]) }}" class="d-block position-relative overflow-hidden">
+                            <img class="card-img-top img-fluid" 
+                                src="{{ asset('storage/images/' . $product->image) }}" 
+                                alt="{{ $product->name }}" 
+                                style="height: 250px; object-fit: cover;">
+                        </a>
+
+                        <!-- Product Details -->
+                        <div class="card-body">
+                            <h6 class="card-title fw-bold mb-1">{{ ucwords($product->title) }}</h6>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <p class="text-success fw-bold mb-0">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
+                                <p class="text-muted mb-0" style="font-size: 0.9rem;">Stock: {{ $product->stock }}</p>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="card-footer bg-transparent border-0">
+                            <form action="{{ route('user.cart.add', $product->id) }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="id_product" value="{{ $product->id }}">
+                                <button type="submit" class="btn btn-dark w-100 rounded-pill">Add to Cart</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
 </section>
 
-<!-- Footer -->
-<footer class="footer">
-    <div class="footer-columns">
-        <div class="footer-column">
-            <h3>Contact Us</h3>
-            <ul>
-                <li><a href="#">Email</a></li>
-                <li><a href="#">Phone</a></li>
-            </ul>
-        </div>
-        <div class="footer-column">
-            <h3>Quick Links</h3>
-            <ul>
-                <li><a href="#categories">Categories</a></li>
-                <li><a href="#products">Products</a></li>
-            </ul>
-        </div>
-    </div>
-    <p>&copy; 2024 MyStore. All Rights Reserved.</p>
-</footer>
-
-</body>
-</html>
+@endsection
+@section('addition_css')
+@endsection
+@section('addition_script')
+    <!-- <script src="{{asset('pages/js/plp.js')}}"></script> -->
+@endsection

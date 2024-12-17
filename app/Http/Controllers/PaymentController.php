@@ -3,56 +3,109 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Payment;
 use App\Models\Order;
+use App\Models\Shipping;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
+
 
 
 class PaymentController extends Controller
 {
-     // Method untuk menangani penyelesaian pembayaran
-     public function submit(Request $request)
+    public function index() : View
     {
-        // Validasi inputan dari form
+        $payment = new Payment;
+        $payments = $payment->get_payment()
+                            ->latest()
+                            ->paginate(10);
+    
+        return view('payment.index', compact('payments'));    
+    }
+    
+    /**
+     * show
+     * 
+     * @param mixed $id
+     * @return View
+     */
+    public function show(string $id): View
+    {
+        $data = (new Payment())->get_payment()->where('payment.id', $id)->firstOrFail();
+
+        return view('payment.show', compact('data'));
+    }
+
+    /**
+     * edit
+     * 
+     * @param mixed $id
+     * @return View
+     */
+    public function edit(string $id): View
+    {
+        $payment = new Payment;
+        $data['payments'] = $payment->get_payment()->where('payment.id', $id)->firstOrFail();
+
+        return view('payment.edit', compact('data'));
+    }
+    
+    public function update(Request $request, $id): RedirectResponse
+    {
+        // Validate the incoming request
         $request->validate([
-            'payment_method' => 'required|string',
-            'order_id' => 'required|exists:orders,id',
-            // validasi lain jika perlu
+            'status' => 'required|in:success,fail,ongoing',  // Validating the status input
         ]);
 
-        // Ambil order berdasarkan ID yang dikirimkan
-        $order = Order::find($request->order_id);
+        // Find the payment by ID (not the order)
+        $payment = Payment::findOrFail($id);
 
-        // Proses pembayaran (misalnya menggunakan API pembayaran atau metode lain)
-        // Contoh: lakukan pembayaran di sini
+        // Update the payment status
+        $payment->status = $request->input('status');
+        $payment->save();
 
-        // Ubah status order setelah pembayaran sukses
-        $order->status = 'paid'; // Misalnya, ubah status order menjadi 'paid'
-        $order->save();
+        if ($payment->status === 'success') {
+            $orderId = $payment->id_order;
+            $userEmail = $payment->user->email;  // Adjust based on your relationship
+    
+            $this->sendEmail($userEmail, $orderId);
 
-        // Redirect atau tampilkan konfirmasi pembayaran
-        return redirect()->route('order.show', ['id' => $order->id])
-             ->with('success', 'Payment successful!');
-    }
- 
-    public function initiate(Request $request)
-    {
-        // Logika pembayaran bisa diletakkan di sini, seperti integrasi dengan Stripe atau PayPal
-        // Di sini kita hanya akan redirect ke halaman pembayaran untuk saat ini
-
-        // Redirect ke halaman pembayaran
-        return redirect()->route('payment.page');
+            Shipping::create([
+                'id_payment' => $payment->id, // Link to the payment
+                'status' => 'ongoing',       // Default status for new shipping
+            ]);
+        }
+        // Redirect to the payment index page after successful update
+        return redirect()->route('payment.index')->with('success', 'Payment status updated successfully!');
     }
 
-    // Halaman untuk menampilkan formulir pembayaran (misalnya, form untuk Stripe atau PayPal)
-    public function showPaymentPage()
-    {
-        return view('payment.page'); // Tampilan halaman pembayaran
-    }
+    private function sendEmail($to, $id){
+        try {
+            $order = new Order;
+            $data = $order->get_order()->where('order.id', $id)->firstOrFail();
+    
+            $total_harga['order'] = $data->total_transaction;
+            
+            $order_entry = [
+                'data' => $data,
+                'total_harga' => $total_harga,
 
-    public function index()
-{
-    // Kamu bisa mengambil data yang diperlukan untuk tampilan pembayaran
-    return view('user.payment.page');
+            ];
+    
+            Mail::send('order.show', $order_entry, function ($message) use ($to) {
+                $message->to($to)
+                    ->subject('Thank You For Your Purchase - Your Order Will Arrive in 1 Week!');
+            });
+    
+            return response()->json(['message' => 'Email sent successfully!']);
+            
+        } catch (\Exception $e) {
+            Log::error('Failed to send email: ' . $e->getMessage());
+    
+            return response()->json(['message' => 'Failed to send email. Please try again later.'], 500);
+            }
+        }
+    
 }
-
-}
-

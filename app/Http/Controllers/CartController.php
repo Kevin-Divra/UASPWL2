@@ -2,51 +2,73 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
+use App\Models\CartDetail;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class CartController extends Controller
 {
-    // Menampilkan isi keranjang
     public function index()
     {
-        $cart = session()->get('cart', []); // Ambil isi cart dari session
-        return view('user.cart', compact('cart'));
-    }
+        // Get the cart for the authenticated user (if exists)
+        $cart = Cart::where('id_user', auth()->id())->first();
 
-    // Menambahkan produk ke cart
-    public function addToCart(Request $request, $id)
-    {
-        $product = Product::findOrFail($id);
-        $cart = session()->get('cart', []); // Ambil isi cart dari session
-
-        // Jika produk sudah ada di cart, tambahkan jumlahnya
-        if (isset($cart[$id])) {
-            $cart[$id]['quantity']++;
+        if ($cart) {
+            // Load the cart details for the current cart, along with product data
+            $cartItems = $cart->cartDetails()->with('product')->get();
         } else {
-            // Jika produk belum ada, tambahkan produk ke cart
-            $cart[$id] = [
-                "title" => $product->title,
-                "quantity" => 1,
-                "price" => $product->price,
-                "image" => $product->image
-            ];
+            $cartItems = collect(); // Empty collection if no cart found
         }
 
-        session()->put('cart', $cart); // Simpan kembali cart ke session
-        return redirect()->route('cart.index')->with('success', 'Product added to cart!');
+        return view('user.cart', compact('cartItems'));
     }
 
-    // Menghapus produk dari cart
-    public function removeFromCart($id)
+    public function addToCart(Request $request)
     {
-        $cart = session()->get('cart', []);
+        $request->validate([
+            'id_product' => 'required|exists:products,id', // Ensure product exists
+        ]);
 
-        if (isset($cart[$id])) {
-            unset($cart[$id]); // Hapus produk dari cart
-            session()->put('cart', $cart); // Update cart di session
-        }
+        // Find or create the user's cart
+        $cart = Cart::firstOrCreate(['id_user' => auth()->id()]);
 
-        return redirect()->route('cart.index')->with('success', 'Product removed from cart!');
+        // Create a new cart detail (item)
+        $cart->cartDetails()->create([
+            'id_product' => $request->id_product,
+            'quantity' => "1"
+        ]);
+
+        return redirect()->route('user.cart')->with('success', 'Product added to cart.');
     }
+    
+    public function update(Request $request, $cartDetailId)
+    {
+        $request->validate([
+            'quantity' => 'required|integer|min:1',
+        ]);
+    
+        // Find the cart detail entry
+        $cartDetail = CartDetail::findOrFail($cartDetailId);
+    
+        // Update the quantity
+        $cartDetail->update([
+            'quantity' => $request->quantity,
+        ]);
+    
+        // Redirect back with a success message
+        return redirect()->route('user.cart')->with('success', 'Cart updated successfully.');
+    }
+
+    public function destroy($cartDetailId)
+    {
+        // Find and delete the cart detail
+        $cartDetail = CartDetail::findOrFail($cartDetailId);
+        $cartDetail->delete();
+
+        return redirect()->route('user.cart')->with('success', 'Product removed from cart.');
+    }
+
 }
