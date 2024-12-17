@@ -10,7 +10,7 @@ class CartDetail extends Model
     use HasFactory;
 
     protected $table = 'cart_detail'; // Use custom table name
-    protected $fillable = ['id_cart', 'id_product', 'id_quantity'];
+    protected $fillable = ['id_cart', 'id_product', 'quantity'];
 
     public function cart()
     {

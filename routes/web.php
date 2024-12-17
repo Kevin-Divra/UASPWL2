@@ -39,7 +39,7 @@ Route::prefix('user')->middleware('auth')->group(function () {
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
     Route::put('/profile/update', [UserController::class, 'updateProfile'])->name('profile.update');
     Route::post('/profile/update-address', [UserController::class, 'updateAddress'])->name('profile.updateAddress');
-    Route::get('/payment', [UserController::class, 'payment'])->name('user.payment');
+    Route::get('/checkout', [UserController::class, 'checkout'])->name('user.checkout');
 
     // Shop Routes
     Route::get('/shop', [ShopController::class, 'index'])->name('user.shop');
@@ -49,8 +49,8 @@ Route::prefix('user')->middleware('auth')->group(function () {
     // Cart Routes
     Route::get('/cart', [CartController::class, 'index'])->name('user.cart');
     Route::post('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('user.cart.add');
-    Route::delete('/cart/remove/{cartDetailId}', [CartController::class, 'removeFromCart'])->name('user.cart.remove');
-    Route::post('/cart/update/{cartDetailId}', [CartController::class, 'updateQuantity'])->name('user.cart.update');
+    Route::delete('/cart/remove/{cartDetailId}', [CartController::class, 'destroy'])->name('user.cart.remove');
+    Route::put('/cart/update/{cartDetailId}', [CartController::class, 'update'])->name('user.cart.update');
 
 });
 

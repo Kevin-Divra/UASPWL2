@@ -82,9 +82,9 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'Address updated successfully.');
     }
 
-    public function payment()
+    public function checkout()
     {
-        return view('user.payment'); // Pastikan path file Blade sudah benar
+        return view('user.checkout'); // Pastikan path file Blade sudah benar
     }
 
     public function cart()

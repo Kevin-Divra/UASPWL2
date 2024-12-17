@@ -78,6 +78,7 @@
                     <div class="card-footer bg-transparent border-0">
                         <form action="{{ route('user.cart.add', $product->id) }}" method="POST">
                             @csrf
+                            <input type="hidden" name="id_product" value="{{ $product->id }}">
                             <button type="submit" class="btn btn-dark w-100 rounded-pill">Add to Cart</button>
                         </form>
                     </div>
