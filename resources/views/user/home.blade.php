@@ -156,7 +156,7 @@
                 <div class="col mb-5">
                     <div class="card h-100 shadow-sm border-1 rounded-4">
                         <!-- Product Image -->
-                        <a href="{{ route('pdp', ['id' => $product->id]) }}" class="d-block position-relative overflow-hidden">
+                        <a href="{{ route('user.shop.product-detail', ['productID' => $product->id]) }}" class="d-block position-relative overflow-hidden">
                             <img class="card-img-top img-fluid" 
                                 src="{{ asset('storage/images/' . $product->image) }}" 
                                 alt="{{ $product->name }}" 

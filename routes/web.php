@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CartController;
 
 // Public Routes
@@ -39,7 +40,9 @@ Route::prefix('user')->middleware('auth')->group(function () {
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
     Route::put('/profile/update', [UserController::class, 'updateProfile'])->name('profile.update');
     Route::post('/profile/update-address', [UserController::class, 'updateAddress'])->name('profile.updateAddress');
-    Route::get('/checkout', [UserController::class, 'checkout'])->name('user.checkout');
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('user.checkout');
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('user.checkout.store');
+    Route::get('/checkout/payment', [CheckoutController::class, 'payment'])->name('user.checkout.payment');
 
     // Shop Routes
     Route::get('/shop', [ShopController::class, 'index'])->name('user.shop');
@@ -59,3 +62,6 @@ Route::prefix('user')->middleware('auth')->group(function () {
 
 // Invoice Route
 Route::get('/invoice', [UserController::class, 'invoice'])->name('layouts.invoice');
+Route::get('/our-story', function () {
+    return view('user.our-story');
+})->name('our-story');
