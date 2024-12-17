@@ -113,29 +113,15 @@
                         <ul>
                             <li><a href="#">1-888-963-8944</a></li>
                             <li><a href="#">1-814-251-9966 (Text)</a></li>
-                            <li><a href="#">help@allbirds.com</a></li>
-                            <li><a href="#">Returns/Exchanges</a></li>
+                            <li><a href="#">GGStore@gmail.com</a></li>
                             <li><a href="#">FAQ/Contact Us</a></li>
-                            <li><a href="#">Afterpay</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column footer-widget">
-                        <h3>Shop</h3>
-                        <ul>
-                            <li><a href="#">Handphone</a></li>
-                            <li><a href="#">Laptop</a></li>
-                            <li><a href="#">TV</a></li>
                         </ul>
                     </div>
                     <div class="footer-column footer-widget">
                         <h3>Company</h3>
                         <ul>
-                            <li><a href="#">Our Stores</a></li>
                             <li><a href="#">Our Story</a></li>
                             <li><a href="#">Our Materials</a></li>
-                            <li><a href="#">Investors</a></li>
-                            <li><a href="#">Bulk Orders</a></li>
-                            <li><a href="#">Community Offers</a></li>
                             <li><a href="#">Our Blog</a></li>
                         </ul>
                     </div>
@@ -149,20 +135,9 @@
                     <li><a href="https://youtube.com"><i class="fab fa-youtube"></i></a></li>
                     <li><a href="https://pinterest.com"><i class="fab fa-pinterest"></i></a></li>
                 </div>
-                <div class="footer-flags">
-                    <span class="flag-icon flag-icon-us"></span>
-                    <span class="flag-icon flag-icon-ca"></span>
-                    <span class="flag-icon flag-icon-au"></span>
-                    <span class="flag-icon flag-icon-nz"></span>
-                    <span class="flag-icon flag-icon-gb"></span>
-                    <span class="flag-icon flag-icon-cn"></span>
-                    <span class="flag-icon flag-icon-jp"></span>
-                    <span class="flag-icon flag-icon-kr"></span>
-                    <span class="flag-icon flag-icon-de"></span>
-                </div>
                 </div>
                 <div class="copyright-text">
-                    &copy; 2024 Allbirds, Inc. All Rights Reserved.
+                    &copy; 2024 GGSTORE, Inc. All Rights Reserved.
                 </div>
             </div>
         </div>

@@ -87,6 +87,10 @@ class UserController extends Controller
         return view('user.payment'); // Pastikan path file Blade sudah benar
     }
 
+    public function cart()
+    {
+        return view('user.cart'); // Pastikan path file Blade sudah benar
+    }
 
     public function invoice()
     {

@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Commerce Home</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-</head>
-<body>
+@extends('layouts.app-public')
+@section('title', 'Home')
+@section('content')
 
 <style>
     /* ========== Global Styles ========== */
@@ -20,28 +12,6 @@
     }
     a {
         text-decoration: none;
-    }
-
-    /* ========== Navbar Styles ========== */
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #A97D52;
-        padding: 15px 7%;
-        color: #fff;
-    }
-    .navbar .logo {
-        font-size: 1.8rem;
-        font-weight: 700;
-    }
-    .navbar a {
-        color: #fff;
-        margin: 0 15px;
-        font-size: 0.95rem;
-    }
-    .navbar a:hover {
-        color: #FFD700;
     }
 
     /* ========== Hero Section ========== */
@@ -141,55 +111,9 @@
         font-size: 0.85rem;
     }
 
-    /* ========== Testimonials ========== */
-    .testimonials {
-        background-color: #333;
-        color: #fff;
-        padding: 50px 7%;
-        text-align: center;
-    }
-    .testimonials h2 {
-        font-size: 2rem;
-        margin-bottom: 20px;
-    }
-    .testimonial-card {
-        display: inline-block;
-        background-color: #444;
-        border-radius: 10px;
-        padding: 20px;
-        margin: 10px;
-        color: #fff;
-    }
 
-    /* ========== Footer ========== */
-    .footer {
-        background-color: #333;
-        color: #fff;
-        padding: 40px 7%;
-    }
-    .footer-columns {
-        display: flex;
-        justify-content: space-between;
-    }
-    .footer-column ul {
-        list-style: none;
-        padding: 0;
-    }
-    .footer-column ul li a {
-        color: #bbb;
-        font-size: 0.9rem;
-    }
 </style>
 
-<!-- Navbar -->
-<nav class="navbar">
-    <div class="logo">GGStore</div>
-    <div>
-        <a href="#categories">Categories</a>
-        <a href="#products">Products</a>
-        <a href="/user/profile">Profile</a>
-    </div>
-</nav>
 
 <!-- Hero Section -->
 <section class="hero-section">
@@ -231,26 +155,9 @@
     </div>
 </section>
 
-<!-- Footer -->
-<footer class="footer">
-    <div class="footer-columns">
-        <div class="footer-column">
-            <h3>Contact Us</h3>
-            <ul>
-                <li><a href="#">Email</a></li>
-                <li><a href="#">Phone</a></li>
-            </ul>
-        </div>
-        <div class="footer-column">
-            <h3>Quick Links</h3>
-            <ul>
-                <li><a href="#categories">Categories</a></li>
-                <li><a href="#products">Products</a></li>
-            </ul>
-        </div>
-    </div>
-    <p>&copy; 2024 MyStore. All Rights Reserved.</p>
-</footer>
-
-</body>
-</html>
+@endsection
+@section('addition_css')
+@endsection
+@section('addition_script')
+    <!-- <script src="{{asset('pages/js/plp.js')}}"></script> -->
+@endsection

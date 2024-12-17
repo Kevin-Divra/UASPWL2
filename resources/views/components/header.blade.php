@@ -16,10 +16,10 @@
     padding: 10px 0;
     font-size: 14px;
 }
-    </style>
+</style>
     <div class="top-banner">
-    Shop Smart, Shop Fast, Shop Us
-  </div>
+        Shop Smart, Shop Fast, Shop Us
+    </div>
  
 <div class="header-area header-area--default bg-white">
    
@@ -42,10 +42,13 @@
                         <nav class="navigation-menu">
                             <ul class="justify-content-center">
                                 <li>
-                                    <a href="{{route('home')}}"><span>Home</span></a>
+                                    <a href="{{route('user.home')}}"><span>Home</span></a>
                                 </li>
                                 <li>
-                                    <a href="{{route('shop')}}"><span>Shop</span></a>
+                                    <a href="{{route('user.shop')}}"><span>Shop</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{route('user.profile')}}"><span>Profile</span></a>
                                 </li>
                             </ul>
                         </nav>
@@ -54,34 +57,11 @@
 
                 <div class="col-lg-3 col-lg-3 col-6">
                     <div class="header-right-side text-end">
-                        <div class="header-right-items d-none d-md-block">
-                            <a href="#wishlist" class="header-cart">
-                            <i class="fas fa-search"></i>
-                            </a>
-                        </div>
 
                         <div class="header-right-items">
-                            <a href="#minicart" class="header-cart">
+                            <a href="{{route('user.cart')}}" class="header-cart">
                             <i class="fas fa-shopping-cart"></i>
                             </a>
-                        </div>
-                        
-                        <div class="header-right-items  d-none d-md-block">
-                            @if(@$_COOKIE['ut'])
-                                <div class="dropdown">
-                                    <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                        Hello, {{ucwords(substr($_COOKIE['ue'], 0, 5))}}
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#my-profile"><span>My Profile</span></a></li>
-                                        <li><a href="#" id="logout-btn"><span>Logout</span></a></li>
-                                    </ul>
-                                </div>
-                            @else
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#authModal">
-                                    <i class="icon-user"></i>
-                                </a>
-                            @endif
                         </div>
                     </div>
                 </div>
