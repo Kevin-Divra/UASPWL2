@@ -255,8 +255,6 @@
 
         <!-- Checkout Steps -->
         <div class="checkout-steps">
-            <span>Shipping</span>
-            <div class="arrow"></div>
             <span class="active">Payment</span>
         </div>
 
@@ -267,7 +265,7 @@
                     <h4>Payment Details</h4>
                     <div class="d-flex gap-3 mb-3">
                         <button id="qris-btn" class="btn btn-outline-dark w-50">QRIS</button>
-                        <button id="creditcard-btn" class="btn btn-outline-dark w-50 active">Credit Card</button>
+                        <button id="creditcard-btn" class="btn btn-outline-dark w-50 active">Rekening</button>
                     </div>
                     <div id="qris-form" style="display: none;">
                     <h5 class="masa-berlaku">Bayar Sebelum 18 Des 2024, 21:35 WIB</h5>

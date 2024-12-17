@@ -31,19 +31,27 @@ class CartController extends Controller
         $request->validate([
             'id_product' => 'required|exists:products,id', // Ensure product exists
         ]);
-
+    
         // Find or create the user's cart
         $cart = Cart::firstOrCreate(['id_user' => auth()->id()]);
-
-        // Create a new cart detail (item)
+    
+        // Check if the product already exists in the cart
+        $existingItem = $cart->cartDetails()->where('id_product', $request->id_product)->first();
+    
+        if ($existingItem) {
+            // If the product is already in the cart, return a message
+            return redirect()->route('user.cart')->with('error', 'Product is already in your cart.');
+        }
+    
+        // If the product is not in the cart, add it
         $cart->cartDetails()->create([
             'id_product' => $request->id_product,
-            'quantity' => "1"
+            'quantity' => 1
         ]);
-
+    
         return redirect()->route('user.cart')->with('success', 'Product added to cart.');
     }
-    
+        
     public function update(Request $request, $cartDetailId)
     {
         $request->validate([

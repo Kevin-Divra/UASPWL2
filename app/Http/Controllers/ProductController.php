@@ -185,5 +185,15 @@ class ProductController extends Controller
         // redirect to index
         return redirect()->route('products.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
+
+    public function product_detail(string $productID): View
+    {
+        $product_model = new Product;
+        
+        $product = $product_model->get_product()->where("products.id", $productID)->firstOrFail();
+    
+        return view('user.product', compact('product'));
+    }
+    
 }
 

@@ -51,13 +51,11 @@ Route::prefix('user')->middleware('auth')->group(function () {
     Route::post('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('user.cart.add');
     Route::delete('/cart/remove/{cartDetailId}', [CartController::class, 'destroy'])->name('user.cart.remove');
     Route::put('/cart/update/{cartDetailId}', [CartController::class, 'update'])->name('user.cart.update');
+    Route::get('/shop/product-details/{productID}', [ProductController::class, 'product_detail'])->name('user.shop.product-detail');
 
 });
 
 // Product Details (Outside Prefix Groups)
-Route::get('/shop/details-product', function () {
-    return view('user.pdp');
-})->name('pdp');
 
 // Invoice Route
 Route::get('/invoice', [UserController::class, 'invoice'])->name('layouts.invoice');
