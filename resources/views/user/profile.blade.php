@@ -316,7 +316,10 @@
                 <h2>{{ ucwords($user->name) }}</h2>          
             </div>
         </div>
-        <button type="submit">Logout</button>
+        <form action="{{ route('logout') }}" method="POST" class="d-inline">
+            @csrf
+            <button type="submit">Logout</button>
+        </form>    
     </div>
     <div class="content">
         <div class="profile-info">
@@ -327,9 +330,9 @@
         <div class="address-info">
             <h3>Address</h3>
             @if($user->address)
-                <p><strong>Street:</strong> {{ $user->address->street }}</p>
-                <p><strong>City:</strong> {{ $user->address->city }}</p>
-                <p><strong>Pos Code:</strong> {{ $user->address->post_code }}</p>
+                <p><strong>Street:</strong> {{ ucwords($user->address->street) }}</p>
+                <p><strong>City:</strong> {{ ucwords($user->address->city) }}</p>
+                <p><strong>Pos Code:</strong> {{ ucwords($user->address->post_code) }}</p>
             @else
                 <p><em>No address provided yet.</em></p>
             @endif
@@ -339,35 +342,25 @@
         <div class="row">
             <!-- Edit Profile -->
             <div class="col-md-6">
-                <form method="POST" action="{{ route('profile.update') }}">
+                <form action="{{ route('profile.update') }}" method="POST">
                     @csrf
                     @method('PUT')
+                    <h5 class="form-title">Edit Profile</h5>
 
-                    <!-- Name Input -->
-                    <div class="input-group">
-                        <label for="name">Name:</label>
-                        <input type="text" name="name" id="name" value="{{ old('name', auth()->user()->name) }}" required>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">New Name</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name', auth()->user()->name) }}">
                     </div>
 
-                    <!-- Email Input -->
-                    <div class="input-group">
-                        <label for="email">Email:</label>
-                        <input type="email" name="email" id="email" value="{{ old('email', auth()->user()->email) }}" required>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">New Password:</label>
+                        <input type="password" class="form-control" name="password" id="password">                    
                     </div>
 
-                    <!-- Password Input -->
-                    <div class="input-group">
-                        <label for="password">New Password:</label>
-                        <input type="password" name="password" id="password">
+                    <div class="mb-3">
+                        <label for="password_confirmation" class="form-label">Confirm New Password:</label>
+                        <input type="password" class="form-control" name="password_confirmation" id="password_confirmation">
                     </div>
-
-                    <!-- Confirm Password Input -->
-                    <div class="input-group">
-                        <label for="password_confirmation">Confirm New Password:</label>
-                        <input type="password" name="password_confirmation" id="password_confirmation">
-                    </div>
-
-                    <!-- Error Handling -->
                     @if ($errors->any())
                         <div class="error-message">
                             <ul>
@@ -377,12 +370,8 @@
                             </ul>
                         </div>
                     @endif
-                    <!-- Submit Button -->
-                    <div>
-                        <button type="submit" class="btn">Update Profile</button>
-                    </div>
+                    <button type="submit" class="btn btn-dark">Save Profile</button>
                 </form>
-
             </div>
             <!-- Edit Address -->
             <div class="col-md-6">
@@ -407,12 +396,6 @@
 
                     <button type="submit" class="btn btn-dark">Save Address</button>
                 </form>
-            </div>
-        </div>
-    <!-- Submit Button -->
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <button type="submit" class="btn btn-dark btn-submit">Submit</button>
             </div>
         </div>
     </div>

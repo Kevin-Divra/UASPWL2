@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard - Products</title>
+    <title>Data Shipping</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -31,15 +31,15 @@
         .sidebar a {
             display: flex;
             align-items: center;
-            justify-content: center; /* Untuk menempatkan ikon dan teks di tengah */
-            gap: 10px; /* Memberikan jarak antara ikon dan teks */
+            justify-content: center; 
+            gap: 10px; 
             padding: 15px;
             color: #585656;
             text-decoration: none;
             font-size: 18px;
         }
         .sidebar a i {
-            font-size: 20px; /* Tambahkan jarak antara ikon dan teks */
+            font-size: 20px; 
         }
         .sidebar a:hover {
             background-color: #2F609C;
@@ -48,13 +48,13 @@
         .sidebar h2 {
             color: #585656;
             text-align: center;
-            background-color: #FFD700; /* Yellow background */
-            padding: 10px; /* Padding for internal spacing */
-            margin: 0; /* Remove the margin */
-            height: 100px; /* Set an appropriate height to extend to the top */
+            background-color: #FFD700; 
+            padding: 10px; 
+            margin: 0; 
+            height: 100px; 
             display: flex;
-            align-items: center; /* Align content vertically */
-            justify-content: center; /* Align content horizontally */
+            align-items: center; 
+            justify-content: center;
             border-radius: 5px;
         }
         .main-content {
@@ -260,61 +260,56 @@
         <a href="{{ url('/shipping') }}"><i class="fas fa-truck"></i> Shippings</a>
     </div>
 
+
     <div class="main-content">
         <div class="table-responsive">
             <div class="table-wrapper">
                 <div class="table-title">
-                    <h2>Product Management</h2>
-                    <a href="{{ route('products.create') }}" class="btn btn-md btn-success mb-3">Add Product</a>
+                    <h2>Data Shipping 101</h2>
                 </div>
                 <table class="table table-striped table-hover table-bordered">
                     <thead>
                         <tr>
-                            <th>Image</th>
-                            <th>Title</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Stock</th>
-                            <th>Actions</th>
+                            <th >ID ORDER</th>
+                            <th >STREET</th>
+                            <th >CITY</th>
+                            <th >POST CODE</th>
+                            <th >STATUS</th>
+                            <th >ACTIONS</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($products as $product)
+                        @forelse ($shippings as $shipping)
                             <tr>
-                                <td><img src="{{  asset('storage/images/' . $product->image) }}" alt="Product Image" width="100"></td>
-                                <td>{{ ucwords($product->title) }}</td>
-                                <td>{{ ucwords($product->product_category_name) }}</td>
-                                <td>{{ "Rp " . number_format($product->price,2,',','.') }}</td>
-                                <td>{{ $product->stock }}</td>
-                                <td>
-                                    <form id="delete-form-{{ $product->id }}" action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="{{ route('products.show', $product->id) }}" class="view" data-toggle="tooltip" title="View">
-                                            <i class="material-icons">&#xE417;</i>
-                                        </a>
-                                        <a href="{{ route('products.edit', $product->id) }}" class="edit" data-toggle="tooltip" title="Edit">
-                                            <i class="material-icons">&#xE254;</i>
-                                        </a>
-                                        <a href="#" onclick="showDeleteConfirmation({{ $product->id }})" class="delete" data-toggle="tooltip" title="Delete">
-                                            <i class="material-icons">&#xE872;</i>
-                                        </a>
-                                    </form>
+                                <td>{{ $shipping->id_order }}</td>
+                                <td>{{ ucwords($shipping->street) }}</td>
+                                <td>{{ ucwords($shipping->city) }}</td>
+                                <td>{{ $shipping->post_code }}</td>
+                                <td>{{ ucwords($shipping->status) }}</td>
+                                <td class="text-center">
+                                    <a href="{{ route('shipping.edit', $shipping->id) }}" class="edit" data-toggle="tooltip" title="Edit">
+                                    <i class="material-icons">&#xE254;</i> 
+                                    </a>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="text-center">Data Products belum Tersedia.</td>
+                                <td colspan="6" class="text-center">No shipping data found.</td>
                             </tr>
                         @endforelse
+
                     </tbody>
                 </table>
-                {{ $products->links() }}
+                {{ $shippings->links() }}
+                    </div>
+                </div>
             </div>
-        </div>        
+        </div>
     </div>
-
     <button class="dark-mode-toggle" onclick="toggleDarkMode()"><i class="fas fa-moon"></i></button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         document.querySelectorAll('.material-icons').forEach(function(icon) {
@@ -352,19 +347,20 @@
             });
         }
 
-        @if(session('success'))
+        // message with sweetalert
+        @if (session('success'))
             Swal.fire({
-                icon: "success",
-                title: "Berhasil",
-                text: "{{ session('success') }}",
+                icon: 'success',
+                title: 'BERHASIL',
+                text: '{{ session('success') }}',
                 showConfirmButton: false,
                 timer: 2000
             });
-        @elseif(session('error'))
+        @elseif (session('error'))
             Swal.fire({
-                icon: "error",
-                title: "Gagal",
-                text: "{{ session('error') }}",
+                icon: 'error',
+                title: 'GAGAL',
+                text: '{{ session('error') }}',
                 showConfirmButton: false,
                 timer: 2000
             });

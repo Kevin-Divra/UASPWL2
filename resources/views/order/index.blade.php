@@ -255,7 +255,9 @@
     <div class="sidebar">
         <h2><i class="fas fa-tachometer-alt" style="margin-right: 10px"></i> Dashboard</h2>
         <a href="{{ url('/products') }}"><i class="fas fa-box"></i> Products</a>
-        <a href="{{ url('/order') }}"><i class="fas fa-money-bill-wave"></i> Orders</a>
+        <a href="{{ url('/order') }}"><i class="fas fa-shopping-cart"></i> Orders</a>
+        <a href="{{ url('/payment') }}"><i class="fas fa-money-bill-wave"></i> Payments</a>
+        <a href="{{ url('/shipping') }}"><i class="fas fa-truck"></i> Shippings</a>
     </div>
 
 
@@ -269,6 +271,7 @@
                 <table class="table table-striped table-hover table-bordered">
                     <thead>
                         <tr>
+                            <th >ID ORDER</th>
                             <th >ORDER DATE</th>
                             <th >BUYER EMAIL</th>
                             <th >PRODUCT NAME</th>
@@ -297,6 +300,7 @@
                             @endphp
                             <tr>
                                 @if ($index === 0)
+                                    <td rowspan="{{ $rowCount }}">{{ $transaction->id }}</td>
                                     <td rowspan="{{ $rowCount }}">{{ $transaction->created_at }}</td>
                                     <td rowspan="{{ $rowCount }}">{{ ucwords($transaction->buyer_email) }}</td>
                                 @endif

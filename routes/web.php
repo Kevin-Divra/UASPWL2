@@ -5,6 +5,9 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ShippingController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -14,22 +17,23 @@ Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 //admin side
 Route::resource('/products', ProductController::class);
 Route::resource('/order', OrderController::class);
+Route::resource('/payment', PaymentController::class);
+Route::resource('/shipping', ShippingController::class);
 Route::get('/order/send-email/{to}/{id}', [OrderController::class, 'sendEmail'])->name('order.send-email');
 
 
 //user side
 Route::get('/user/home', [UserController::class, 'index'])->name('user.home');
 Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
-Route::put('/profile/update', [UserController::class, 'updateProfile'])->name('profile.update');
-Route::get('/home', [UserController::class, 'index'])->name('home');
-Route::post('/profile/update-address', [UserController::class, 'updateAddress'])->name('profile.updateAddress');
+Route::put('/user/profile/update', [UserController::class, 'updateProfile'])->name('profile.update');
+Route::post('user/profile/update-address', [UserController::class, 'updateAddress'])->name('profile.updateAddress');
+Route::get('user/payment', [UserController::class, 'payment'])->name('payment');
 
-
-// Route::get('/plp', [ProductController::class, 'plp'])->name('plp');
 Route::get('/shop', function () {
     return view('user.shop');
 })->name('shop');
