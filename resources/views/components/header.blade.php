@@ -1,5 +1,5 @@
 <!-- header -->
-< <!DOCTYPE html>
+<!DOCTYPE html>
  <html lang="en">
  <head>
     <meta charset="UTF-8">
@@ -18,7 +18,7 @@
 }
     </style>
     <div class="top-banner">
-    Extended Warranty for Peace of Mind After Your Purchase
+    Shop Smart, Shop Fast, Shop Us
   </div>
  
 <div class="header-area header-area--default bg-white">
@@ -29,10 +29,10 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 col-lg-3 col-6">
                     <div class="header-right-items content__hidden d-none d-md-block">
-                    <small class="text-color-primary"><b>allbirds</b></small></a>
+                    <small class="text-color-primary"><b>GGStore</b></small></a>
                     </div>
                     <div class="logo__hidden text-start">
-                    <small class="text-color-primary"><b>allbirds</b></small></a>
+                    <small class="text-color-primary"><b>GGStore</b></small></a>
                     </div>
                 </div>
 
@@ -45,7 +45,7 @@
                                     <a href="{{route('home')}}"><span>Home</span></a>
                                 </li>
                                 <li>
-                                    <a href="{{route('plp')}}"><span>Shop</span></a>
+                                    <a href="{{route('shop')}}"><span>Shop</span></a>
                                 </li>
                             </ul>
                         </nav>

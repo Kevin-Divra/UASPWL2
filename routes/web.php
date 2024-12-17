@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BabyneedsController;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
+Route::view('/our-story', 'user.our-story')->name('our.story');
+
 Route::get('/', function () {
     return view('pages.home');
 })->name('home');
@@ -19,3 +21,5 @@ Route::get('/babyneed/{i}', function () {
 Route::get('/profile', function () {
     return view('pages.profile'); // Menampilkan view 'resources/views/halaman.blade.php'
 });
+
+Route::view('/our-story', 'user.our-story')->name('our.story');
