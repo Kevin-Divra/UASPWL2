@@ -21,8 +21,7 @@ class Product extends Model
     ];
     
     public function get_product(){
-        $sql = $this->select("products.*", "category_product.product_category_name as product_category_name", "suppliers.supplier_name as supplier_name")
-                    ->join('suppliers', 'suppliers.id', '=', 'products.id_supplier')
+        $sql = $this->select("products.*", "category_product.product_category_name as product_category_name")
                     ->join('category_product', 'category_product.id', '=', 'products.product_category_id');
         return $sql;
     }
@@ -41,7 +40,6 @@ class Product extends Model
             'image'               => $image->hashName(),
             'title'               => $request->title,
             'product_category_id' => $request->product_category_id,
-            'id_supplier'         => $request->id_supplier,
             'description'         => $request->description,
             'price'               => $request->price,
             'stock'               => $request->stock    
