@@ -97,28 +97,15 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h3>Add New Transaction</h3>
+                <h3>Add New Order</h3>
                 <div class="card">
                     <div class="card-body">
-                        <form id="transactionForm" action="{{ route('transaction.store') }}" method="POST" enctype="multipart/form-data">
+                        <form id="transactionForm" action="{{ route('order.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-
-                            <div class="form-group mb-4">
-                                <label for="nama_kasir_id">Cashier Name</label>
-                                <select class="form-control" id="nama_kasir_id" name="nama_kasir_id">
-                                    <option value="">-- Select Cashier --</option>
-                                    @foreach ($data['cashiers'] as $cashier)
-                                        <option value="{{ $cashier->id }}">{{ ucwords($cashier->nama_kasir) }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
                             <div class="form-group mb-4">
                                 <label for="nama_kasir_id">Email</label>
-                                <input type="email" class="form-control" name="email_pembeli" placeholder="Enter Your Email">
+                                <input type="email" class="form-control" name="buyer_email" placeholder="Enter Your Email">
                             </div>
-
-
                             <!-- Product container for dynamic products -->
                             <div id="product-container">
                                 <div class="product-row">

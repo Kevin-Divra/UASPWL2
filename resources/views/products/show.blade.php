@@ -131,8 +131,6 @@
                     <hr />
                     <p class="product-details">Category: <strong>{{ ucwords($product->product_category_name) }}</strong></p>
                     <hr />
-                    <p class="product-details">Supplier: <strong>{{ ucwords($product->supplier_name) }}</strong></p>
-                    <hr />
                     <p class="product-price">Price: Rp{{ number_format($product->price, 2, ',', '.') }}</p>
                     <hr />
                     <code>
