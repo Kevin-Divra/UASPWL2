@@ -255,8 +255,7 @@
     <div class="sidebar">
         <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
         <a href="#"><i class="fas fa-box"></i> Products</a>
-        <a href="{{ url('/supplier') }}"><i class="fas fa-truck"></i> Suppliers</a>
-        <a href="{{ url('/transaction') }}"><i class="fas fa-money-bill-wave"></i> Transaction</a>
+        <a href="{{ url('/order') }}"><i class="fas fa-money-bill-wave"></i> Orders</a>
     </div>
 
     <div class="main-content">
@@ -270,7 +269,6 @@
                     <thead>
                         <tr>
                             <th>Image</th>
-                            <th>Supplier</th>
                             <th>Title</th>
                             <th>Category</th>
                             <th>Price</th>
@@ -282,9 +280,14 @@
                         @forelse ($products as $product)
                             <tr>
                                 <td><img src="{{  asset('storage/images/' . $product->image) }}" alt="Product Image" width="100"></td>
+<<<<<<< HEAD
                                 <td>{{ $product->supplier_name }}</td>
                                 <td>{{ $product->title }}</td>
                                 <td>{{ $product->product_category_name }}</td>
+=======
+                                <td>{{ ucwords($product->title) }}</td>
+                                <td>{{ ucwords($product->product_category_name) }}</td>
+>>>>>>> 2f388a05f1842c6c7e630fdd0be686d24f29cbc5
                                 <td>{{ "Rp " . number_format($product->price,2,',','.') }}</td>
                                 <td>{{ $product->stock }}</td>
                                 <td>

@@ -131,8 +131,11 @@
                     <hr />
                     <p class="product-details">Category: <strong>{{ $product->product_category_name }}</strong></p>
                     <hr />
+<<<<<<< HEAD
                     <p class="product-details">Supplier: <strong>{{ $product->supplier_name }}</strong></p>
                     <hr />
+=======
+>>>>>>> 2f388a05f1842c6c7e630fdd0be686d24f29cbc5
                     <p class="product-price">Price: Rp{{ number_format($product->price, 2, ',', '.') }}</p>
                     <hr />
                     <code>

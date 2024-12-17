@@ -2,89 +2,159 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return User::all();
+        return view('user.home'); // Pastikan path file Blade sudah benar
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
+    public function profile()
     {
-        $user = User::find($id);
-        if (!$user) return response()->json(['message' => 'User not found'], 404);
-        return $user;
+        $user = Auth::user(); // Get the logged-in user
+
+        if (!$user) {
+            return redirect('/login')->with('error', 'Please log in first.');
+        }
+
+        // Eager load the address (it can be null)
+        $user->load('address');
+
+        return view('user.profile', compact('user'));
     }
-    
+
+    public function updateProfile(Request $request)
+    {
+        // Validate the request data
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'password' => 'nullable|min:6|confirmed',
+        ]);
+
+        // Get the authenticated user
+        $user = Auth::user();
+        $user->name = $validated['name'];
+
+        if ($validated['password']) {
+            $user->password = Hash::make($validated['password']);
+        }
+
+        // Save the updated user data
+        $user->save();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Profile updated successfully.');
+    }
+
+    public function updateAddress(Request $request)
+    {
+        $request->validate([
+            'street' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'post_code' => 'required|numeric',
+        ]);
+
+        $user = Auth::user();
+
+        // If the user already has an address, update it
+        if ($user->address) {
+            $user->address->update($request->only(['street', 'city', 'post_code']));
+        } else {
+            // Otherwise, create a new address
+            UserAddress::create([
+                'id_user' => $user->id,
+                'street' => $request->street,
+                'city' => $request->city,
+                'post_code' => $request->post_code,
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Address updated successfully.');
+    }
+
+
+
+    public function invoice()
+    {
+        return view('layouts.invoice'); // Pastikan path file Blade sudah benar
+    }
+
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        // validasi input
-        $validateData = $request->validate([
-            'name'=> 'required|string|max:255',
-            'email'=> 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-        ]);
+         // Validasi input
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:8',
+    ]);
 
-        // hash password
-        $validateData['password'] = bcrypt($validateData['password']);
+    // Hash password
+    $validatedData['password'] = bcrypt($validatedData['password']);
 
-        // buat user baru 
-        $user = User::create($validateData);
+    // Buat user baru
+    $user = User::create($validatedData);
 
-        return response()->json($user, 201);
+    return response()->json($user, 201);
     }
 
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $user = User::find($id);
+        if (!$user) return response()->json(['message' => 'User not found'], 404);
+        return $user;
+    }
 
     /**
      * Update the specified resource in storage.
      */
-    // Memperbarui user berdasarkan ID
-public function update(Request $request, $id)
+    public function update(Request $request, string $id)
     {
         $user = User::find($id);
-        if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
-        }
+    if (!$user) {
+        return response()->json(['message' => 'User not found'], 404);
+    }
 
-        // Validasi input
-        $validatedData = $request->validate([
-            'name' => 'nullable|string|max:255',
-            'email' => 'nullable|string|email|max:255|unique:users,email,' . $id,
-            'password' => 'nullable|string|min:8'
-        ]);
+    // Validasi input
+    $validatedData = $request->validate([
+        'name' => 'nullable|string|max:255',
+        'email' => 'nullable|string|email|max:255|unique:users,email,' . $id,
+        'password' => 'nullable|string|min:8',
+    ]);
 
-        // Hash password jika ada input password baru
-        if (isset($validatedData['password'])) {
-            $validatedData['password'] = bcrypt($validatedData['password']);
-        }
+    // Hash password jika ada input password baru
+    if (isset($validatedData['password'])) {
+        $validatedData['password'] = bcrypt($validatedData['password']);
+    }
 
-        // Update user
-        $user->update($validatedData);
+    // Update user
+    $user->update($validatedData);
 
-        return response()->json($user, 200);
+    return response()->json($user, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    // menghapus user berdasarkan id
-    public function destroy($id)
+    public function destroy(string $id)
     {
         $user = User::find($id);
-        if (!$user) return response()->json(['message'=> 'User not found'], 404);
+        if (!$user) return response()->json(['message' => 'User not found'], 404);
 
         $user->delete();
         return response()->json(null, 204);
