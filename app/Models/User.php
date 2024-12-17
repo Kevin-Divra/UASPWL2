@@ -18,6 +18,8 @@ class User extends Authenticatable
         'role', // For admin or user
     ];
 
+    
+
     protected $hidden = [
         'password',
         'remember_token',
@@ -35,4 +37,10 @@ class User extends Authenticatable
     public function address(){
         return $this->hasOne(UserAddress::class, 'id_user', 'id');
     }
+
+    public function cart()
+{
+    return $this->hasMany(Cart::class, 'user_id');
+}
+
 }

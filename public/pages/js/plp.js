@@ -136,4 +136,35 @@ function getData(toPage=1) {
         getData();
     });
     
+    //shop
+    document.addEventListener('DOMContentLoaded', function() {
+        // Memuat produk pertama kali saat halaman dimuat
+        loadProducts();
+    
+        // Fungsi untuk memuat produk dan pagination
+        function loadProducts(page = 1) {
+            fetch(`/api/products?page=${page}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Menambahkan produk ke dalam #product-list
+                    document.getElementById('product-list').innerHTML = data.products;
+    
+                    // Menambahkan pagination ke dalam #product-list-pagination
+                    document.getElementById('product-list-pagination').innerHTML = data.pagination;
+    
+                    // Menambahkan event listener pada setiap link pagination
+                    let paginationLinks = document.querySelectorAll('#product-list-pagination a');
+                    paginationLinks.forEach(link => {
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            let page = link.getAttribute('href').split('page=')[1];
+                            loadProducts(page); // Memuat produk untuk halaman yang dipilih
+                        });
+                    });
+                })
+                .catch(error => {
+                    console.error('Error memuat produk:', error);
+                });
+        }
+    });
     

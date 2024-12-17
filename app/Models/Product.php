@@ -45,4 +45,10 @@ class Product extends Model
             'stock'               => $request->stock    
         ]);
     }
+
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class, 'id_product');
+    }
+
 }
