@@ -16,29 +16,11 @@
 
     /* ========== Hero Section ========== */
     .hero-section {
-    position: relative;
-    background: url('https://png.pngtree.com/thumb_back/fw800/background/20230521/pngtree-commercial-electronics-store-of-many-screens-image_2667345.jpg') no-repeat center/cover;
-    text-align: center;
-    padding: 100px 20px;
-    color: #fff;
-}
-
-.hero-section::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Warna gelap dengan transparansi */
-    z-index: 1; /* Agar berada di atas gambar, tapi di bawah teks */
-}
-
-.hero-section > * {
-    position: relative;
-    z-index: 2; /* Menjaga teks tetap di atas overlay */
-}
-
+        background: url('/storage/images/home-hero-page.jpg') no-repeat center/cover;
+        text-align: center;
+        padding: 100px 20px;
+        color: #fff;
+    }
     .hero-section h1 {
         font-size: 2.5rem;
         font-weight: 700;
@@ -79,8 +61,8 @@
         box-shadow: 0 4px 6px rgba(255, 0, 0, 0.4);
     }
     .category-card img {
-        width: 100%;
-        height: 180px;
+        width: 300px;
+        height: 200px;
         object-fit: cover;
     }
     .category-card h3 {
@@ -198,29 +180,30 @@
 <!-- Hero Section -->
 <section class="hero-section">
     <h1>Push Your Limit</h1>
-    <p>Explore exclusive products and deals curated just for you</p>
+    <p style="color: black;">Explore exclusive products and deals curated just for you</p>
     <div>
-        <a href="/shop">Shop Now</a>
+        <a href="/shop" style="color: black;">Shop Now</a>
     </div>
+
 </section>
 
 <!-- Categories -->
 <section class="categories" id="categories">
     <div class="category-card">
         <a href="{{ route('user.shop.query', ['query' => '', 'category' => 'Laptop', 'sort_by' => 'title', 'sort_direction' => 'asc']) }}">
-        <img src="https://www.ptbsb.id/wp-content/uploads/2022/09/13.-Distributor-Laptop-Gaming-20-Jutaan-Terpercaya-scaled.jpg" alt="Laptop" style="width: 300px; height: 200px;">
+            <img src="/storage/images/laptop.jpg" alt="Laptop">
             <h3>Laptops</h3>
         </a>
     </div>
     <div class="category-card">
         <a href="{{ route('user.shop.query', ['query' => '', 'category' => 'Camera', 'sort_by' => 'title', 'sort_direction' => 'asc']) }}">
-            <img src="https://www.adobe.com/creativecloud/photography/discover/media_1b4507ec1fa10efefcbe23c58bea28edf67c4f402.png?width=750&format=png&optimize=medium" alt="Camera" style="width: 300px; height: 200px;">
+            <img src="/storage/images/camera.jpg" alt="Camera">
             <h3>Cameras</h3>
         </a>
     </div>
     <div class="category-card">
         <a href="{{ route('user.shop.query', ['query' => '', 'category' => 'Powerbanks', 'sort_by' => 'title', 'sort_direction' => 'asc']) }}">
-            <img src="https://rank.co.id/wp-content/uploads/2023/05/Power-Bank-Robot.jpg" alt="Powerbanks" style="width: 300px; height: 200px;">
+            <img src="/storage/images/powerbank.jpg" alt="Powerbanks">
             <h3>Powerbanks</h3>
         </a>
     </div>
@@ -236,7 +219,7 @@
                 <div class="col mb-5">
                     <div class="card h-100 shadow-sm border-1 rounded-4">
                         <!-- Product Image -->
-                        <a href="{{ route('pdp', ['id' => $product->id]) }}" class="d-block position-relative overflow-hidden">
+                        <a href="{{ route('user.shop.product-detail', ['productID' => $product->id]) }}" class="d-block position-relative overflow-hidden">
                             <img class="card-img-top img-fluid" 
                                 src="{{ asset('storage/images/' . $product->image) }}" 
                                 alt="{{ $product->name }}" 

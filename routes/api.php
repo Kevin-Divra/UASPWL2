@@ -15,3 +15,4 @@ Route::get('/user', function (Request $request) {
 Route::get('test', function(){
     return response()->json(['message' => 'API is working!',]);
 });
+

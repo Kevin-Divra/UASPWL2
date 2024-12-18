@@ -112,7 +112,7 @@
                         <h3>Help</h3>
                         <ul>
                             <li><a href="#">1-888-963-8944</a></li>
-                            <li><a href="#">1-814-251-9966 (Text)</a></li>
+                            <li><a href="#">081231231231</a></li>
                             <li><a href="#">GGStore@gmail.com</a></li>
                             <li><a href="#">FAQ/Contact Us</a></li>
                         </ul>
@@ -120,9 +120,9 @@
                     <div class="footer-column footer-widget">
                         <h3>Company</h3>
                         <ul>
-                            <li><a href="#">Our Story</a></li>
-                            <li><a href="#">Our Materials</a></li>
-                            <li><a href="#">Our Blog</a></li>
+                            <li><a href="{{ route('our-story') }}">Our Story</a></li>
+                            <li><a href="{{ route('our-materials') }}">Our Materials</a></li>
+                            <li><a href="{{ route('our-blog') }}">Our Blog</a></li>
                         </ul>
                     </div>
                 </div>
