@@ -65,3 +65,9 @@ Route::get('/invoice', [UserController::class, 'invoice'])->name('layouts.invoic
 Route::get('/our-story', function () {
     return view('user.our-story');
 })->name('our-story');
+Route::get('/our-materials', function () {
+    return view('user.our-materials');
+})->name('our-materials');
+Route::get('/our-blog', function () {
+    return view('user.our-blog');
+})->name('our-blog');
