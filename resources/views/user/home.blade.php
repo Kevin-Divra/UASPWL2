@@ -16,7 +16,7 @@
 
     /* ========== Hero Section ========== */
     .hero-section {
-        background: url('https://via.placeholder.com/1200x500') no-repeat center/cover;
+        background: url('/storage/images/home-hero-page.jpg') no-repeat center/cover;
         text-align: center;
         padding: 100px 20px;
         color: #fff;
@@ -60,8 +60,8 @@
         transform: translateY(-5px);
     }
     .category-card img {
-        width: 100%;
-        height: 180px;
+        width: 300px;
+        height: 200px;
         object-fit: cover;
     }
     .category-card h3 {
@@ -118,29 +118,30 @@
 <!-- Hero Section -->
 <section class="hero-section">
     <h1>Push Your Limit</h1>
-    <p>Explore exclusive products and deals curated just for you</p>
+    <p style="color: black;">Explore exclusive products and deals curated just for you</p>
     <div>
-        <a href="/shop">Shop Now</a>
+        <a href="/shop" style="color: black;">Shop Now</a>
     </div>
+
 </section>
 
 <!-- Categories -->
 <section class="categories" id="categories">
     <div class="category-card">
         <a href="{{ route('user.shop.query', ['query' => '', 'category' => 'Laptop', 'sort_by' => 'title', 'sort_direction' => 'asc']) }}">
-            <img src="https://via.placeholder.com/300x200" alt="Laptop">
+            <img src="/storage/images/laptop.jpg" alt="Laptop">
             <h3>Laptops</h3>
         </a>
     </div>
     <div class="category-card">
         <a href="{{ route('user.shop.query', ['query' => '', 'category' => 'Camera', 'sort_by' => 'title', 'sort_direction' => 'asc']) }}">
-            <img src="https://via.placeholder.com/300x200" alt="Camera">
+            <img src="/storage/images/camera.jpg" alt="Camera">
             <h3>Cameras</h3>
         </a>
     </div>
     <div class="category-card">
         <a href="{{ route('user.shop.query', ['query' => '', 'category' => 'Powerbanks', 'sort_by' => 'title', 'sort_direction' => 'asc']) }}">
-            <img src="https://via.placeholder.com/300x200" alt="Powerbanks">
+            <img src="/storage/images/powerbank.jpg" alt="Powerbanks">
             <h3>Powerbanks</h3>
         </a>
     </div>
