@@ -20,7 +20,6 @@ class OrderController extends Controller
     * index
     * @return void
     */
-    
 
     public function index() : View
     {
@@ -40,18 +39,13 @@ class OrderController extends Controller
 
     public function create() : View
     {
-         $order = new Order;
+        $order = new Order;
         $product = new Product;
 
         $data['products'] = $product->get_product()->get();
-        
-        // Periksa peran user yang sedang login
-        if (auth()->user()->role === 'user') {
-            return view('user.create', compact('data')); // View untuk user biasa
-        }
-        return view('order.create', compact('data')); // View untuk admin
+
+        return view('order.create', compact('data'));    
     }
-    
 
     /**
      * Store a new transaction and reduce product stock.
@@ -151,15 +145,8 @@ class OrderController extends Controller
     {
         $data = (new Order())->get_order()->where('order.id', $id)->firstOrFail();
 
-         // Cek peran user yang sedang login
-        if (auth()->user()->role === 'user') {
-            // Jika role user adalah 'user', arahkan ke view user.order.show
-            return view('user.order.show', compact('data'));
-        }
-
-    // Jika role adalah admin, tetap arahkan ke view order.show
-    return view('order.show', compact('data'));
-}
+        return view('order.show', compact('data'));
+    }
     
     /**
      * edit
@@ -316,14 +303,4 @@ class OrderController extends Controller
         return response()->json(['message' => 'Failed to send email. Please try again later.'], 500);
     }
     }
-
-    public function payment()
-{
-    // Cek jika pengguna sudah memiliki keranjang atau pesanan
-    $user = auth()->user();
-    $cartItems = $user->cart()->with('product')->get(); // Menyesuaikan dengan relasi yang ada
-    $totalPrice = $cartItems->sum('total'); // Menghitung total harga dari produk di keranjang
-
-    return view('user.order.payment.index', compact('cartItems', 'totalPrice'));
-}
 }

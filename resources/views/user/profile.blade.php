@@ -36,14 +36,6 @@
             font-size: 14px;
             color: #fff;
         }
-        .header button {
-            background-color: #A97D52;
-            color: white;
-            padding: 10px 15px;
-            border-color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
         .content {
             display: flex;
             justify-content: space-between;
@@ -114,6 +106,38 @@
         .form-label {
         color: black;
         }
+
+        .btn {
+        display: inline-block;
+        padding: 0.1rem 1.8rem;
+        font-size: 16px;
+        font-weight: 700;
+        color: white;
+        border: 3px solid rgb(252, 70, 100);
+        cursor: pointer;
+        position: relative;
+        background-color: transparent;
+        overflow: hidden;
+        z-index: 1;
+        font-family: inherit;
+        }
+
+        .btn::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(252, 70, 100);
+        transform: translateX(-100%);
+        transition: all .3s;
+        z-index: -1;
+        }
+
+        .btn:hover::before {
+        transform: translateX(0);
+        }
         .btn-dark {
         background-color: #000000;
         color: #FFFFFF;
@@ -146,7 +170,7 @@
         </div>
         <form action="{{ route('logout') }}" method="POST" class="d-inline">
             @csrf
-            <button type="submit">Logout</button>
+            <button class="btn" type="submit">Logout</button>
         </form>    
     </div>
     <div class="content">

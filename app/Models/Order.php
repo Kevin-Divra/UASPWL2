@@ -11,7 +11,6 @@ class Order extends Model
 {
     use HasFactory;
     protected $table = 'order';
-    protected $fillable = ['id_user', 'total_price'];
 
     public function payment()
     {
@@ -46,18 +45,4 @@ class Order extends Model
             $sql->where('order.id', $id);
         }
     }
-
-    // Relasi ke user
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    // Relasi ke Order Detail
-    public function details()
-    {
-        return $this->hasMany(OrderDetail::class, 'id_order');
-    }
 }
-
-

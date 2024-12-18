@@ -23,6 +23,7 @@
             width: 100%;
             max-width: 400px;
         }
+        
 
         h2 {
             font-size: 24px;
@@ -69,28 +70,32 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>Login</h2>
-        <form action="{{ route('login') }}" method="POST">
-            @csrf
-            <div class="input-group">
-                <label for="email">Email Address</label>
-                <input type="email" name="email" id="email" value="{{ old('email') }}" required>
-            </div>
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" required>
-            </div>
-            @if ($errors->any())
-                <div class="error-message">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+        <div class="card">
+    
+            <h2>Login</h2>
+            <form action="{{ route('login') }}" method="POST">
+                @csrf
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" name="email" id="email" value="{{ old('email') }}" required>
                 </div>
-            @endif
-            <button type="submit" class="btn">Login</button>
-        </form>
+                
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+                @if ($errors->any())
+                    <div class="error-message">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <button type="submit" class="btn">Login</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>

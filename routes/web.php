@@ -5,6 +5,11 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ShippingController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CartController;
 
 // Public Routes
 Route::get('/', function () {
@@ -23,73 +28,46 @@ Route::controller(AuthController::class)->group(function () {
 // Admin Side Routes
 Route::resource('/products', ProductController::class);
 Route::resource('/order', OrderController::class);
-Route::get('/order/send-email/{to}/{id}', [OrderController::class, 'sendEmail'])->name('order.send-email');
+Route::resource('/payment', PaymentController::class);
+Route::resource('/shipping', ShippingController::class);
+
+// Order-specific custom route
+Route::get('/order/send-email/{to}/{id}', [OrderController::class, 'sendEmail'])
+    ->name('order.send-email');
+// User Side Routes
+Route::prefix('user')->middleware('auth')->group(function () {
+    Route::get('/home', [UserController::class, 'index'])->name('user.home');
+    Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::put('/profile/update', [UserController::class, 'updateProfile'])->name('profile.update');
+    Route::post('/profile/update-address', [UserController::class, 'updateAddress'])->name('profile.updateAddress');
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('user.checkout');
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('user.checkout.store');
+    Route::get('/checkout/payment', [CheckoutController::class, 'payment'])->name('user.checkout.payment');
+
+    // Shop Routes
+    Route::get('/shop', [ShopController::class, 'index'])->name('user.shop');
+    Route::get('/shop/query', [ShopController::class, 'query'])->name('user.shop.query');
 
 
-//user side
-Route::get('/user/home', [UserController::class, 'index'])->name('user.home');
-Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
-Route::put('/profile/update', [UserController::class, 'updateProfile'])->name('profile.update');
-Route::get('/home', [UserController::class, 'index'])->name('home');
-Route::post('/profile/update-address', [UserController::class, 'updateAddress'])->name('profile.updateAddress');
+    // Cart Routes
+    Route::get('/cart', [CartController::class, 'index'])->name('user.cart');
+    Route::post('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('user.cart.add');
+    Route::delete('/cart/remove/{cartDetailId}', [CartController::class, 'destroy'])->name('user.cart.remove');
+    Route::put('/cart/update/{cartDetailId}', [CartController::class, 'update'])->name('user.cart.update');
+    Route::get('/shop/product-details/{productID}', [ProductController::class, 'product_detail'])->name('user.shop.product-detail');
 
+});
 
-// Route::get('/plp', [ProductController::class, 'plp'])->name('plp');
-Route::get('/shop', function () {
-    return view('user.shop');
-})->name('shop');
-
-Route::get('/shop/details-product', function () {
-    return view('user.pdp');
-})->name('pdp');
+// Product Details (Outside Prefix Groups)
 
 // Invoice Route
 Route::get('/invoice', [UserController::class, 'invoice'])->name('layouts.invoice');
-
-// use Illuminate\Support\Facades\Route;
-// use App\Http\Controllers\TransactionController;
-// use App\Http\Controllers\AuthController;
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::resource('/products',  \App\Http\Controllers\ProductController::class);
-// Route::get('/user/home', [UserController::class, 'index'])->name('user.home');
-// Route::get('/user/profile', [\App\Http\Controllers\UserController::class, 'profile'])->name('user.profile');
-// Route::get('/home', [UserController::class, 'index'])->name('home');
-// Route::resource('/supplier', \App\Http\Controllers\SupplierController::class);
-// Route::resource('/transaction', TransactionController::class);
-// Route::get('/transaction/send-email/{to}/{id}', [TransactionController::class, 'sendEmail']);
-
-// Route::get('/login/admin', [AuthController::class, 'showAdminLoginForm'])->name('admin.login');
-// Route::post('/login/admin', [AuthController::class, 'adminLogin']);
-
-// Route::get('/login/user', [AuthController::class, 'showUserLoginForm'])->name('user.login');
-// Route::post('/login/user', [AuthController::class, 'userLogin']);
-
-
-// Route::get('/plp', [ProductController::class, 'plp'])->name('plp');
-
-// Route::get('/layouts/invoice', [\App\Http\Controllers\UserController::class, 'invoice'])->name('layouts.invoice');
-
-
-
-
-
-// Route::get('/', function () {
-//     return view('user.home');
-// })->name('home');
-
-// Route::get('/babyneed', function () {
-//     return view('user.plp');
-// })->name('plp');
-
-// Route::get('/babyneed/{i}', function () {
-//     return view('user.pdp');
-// })->name('pdp');
-
-// Route::get('/profile', function () {
-//     return view('user.profile'); // Menampilkan view 'resources/views/halaman.blade.php'
-// });
-
+Route::get('/our-story', function () {
+    return view('user.our-story');
+})->name('our-story');
+Route::get('/our-materials', function () {
+    return view('user.our-materials');
+})->name('our-materials');
+Route::get('/our-blog', function () {
+    return view('user.our-blog');
+})->name('our-blog');

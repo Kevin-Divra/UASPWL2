@@ -16,11 +16,29 @@
 
     /* ========== Hero Section ========== */
     .hero-section {
-        background: url('https://via.placeholder.com/1200x500') no-repeat center/cover;
-        text-align: center;
-        padding: 100px 20px;
-        color: #fff;
-    }
+    position: relative;
+    background: url('https://png.pngtree.com/thumb_back/fw800/background/20230521/pngtree-commercial-electronics-store-of-many-screens-image_2667345.jpg') no-repeat center/cover;
+    text-align: center;
+    padding: 100px 20px;
+    color: #fff;
+}
+
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Warna gelap dengan transparansi */
+    z-index: 1; /* Agar berada di atas gambar, tapi di bawah teks */
+}
+
+.hero-section > * {
+    position: relative;
+    z-index: 2; /* Menjaga teks tetap di atas overlay */
+}
+
     .hero-section h1 {
         font-size: 2.5rem;
         font-weight: 700;
@@ -53,11 +71,12 @@
         border-radius: 10px;
         overflow: hidden;
         text-align: center;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 6px rgba(153, 35, 35, 0.1);
         transition: all 0.3s ease;
     }
     .category-card:hover {
         transform: translateY(-5px);
+        box-shadow: 0 4px 6px rgba(255, 0, 0, 0.4);
     }
     .category-card img {
         width: 100%;
@@ -110,6 +129,67 @@
         cursor: pointer;
         font-size: 0.85rem;
     }
+    .card-footer {
+        padding: 20px 40px;
+    }
+
+    .button {
+    position: relative;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 1px solid #34974d;
+    background-color: #3aa856;
+    }
+
+    .button, .button__icon, .button__text {
+    transition: all 0.3s;
+    }
+
+    .button .button__text {
+    transform: translateX(30px);
+    color: #fff;
+    font-weight: 600;
+    }
+
+    .button .button__icon {
+    position: absolute;
+    transform: translateX(109px);
+    height: 100%;
+    width: 39px;
+    background-color: #34974d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+    .button .svg {
+    width: 30px;
+    stroke: #fff;
+    }
+
+    .button:hover {
+    background: #34974d;
+    }
+
+    .button:hover .button__text {
+    color: transparent;
+    }
+
+    .button:hover .button__icon {
+    width: 148px;
+    transform: translateX(0);
+    }
+
+    .button:active .button__icon {
+    background-color: #2e8644;
+    }
+
+    .button:active {
+    border: 1px solid #2e8644;
+    }
 
 
 </style>
@@ -128,19 +208,19 @@
 <section class="categories" id="categories">
     <div class="category-card">
         <a href="{{ route('user.shop.query', ['query' => '', 'category' => 'Laptop', 'sort_by' => 'title', 'sort_direction' => 'asc']) }}">
-            <img src="https://via.placeholder.com/300x200" alt="Laptop">
+        <img src="https://www.ptbsb.id/wp-content/uploads/2022/09/13.-Distributor-Laptop-Gaming-20-Jutaan-Terpercaya-scaled.jpg" alt="Laptop" style="width: 300px; height: 200px;">
             <h3>Laptops</h3>
         </a>
     </div>
     <div class="category-card">
         <a href="{{ route('user.shop.query', ['query' => '', 'category' => 'Camera', 'sort_by' => 'title', 'sort_direction' => 'asc']) }}">
-            <img src="https://via.placeholder.com/300x200" alt="Camera">
+            <img src="https://www.adobe.com/creativecloud/photography/discover/media_1b4507ec1fa10efefcbe23c58bea28edf67c4f402.png?width=750&format=png&optimize=medium" alt="Camera" style="width: 300px; height: 200px;">
             <h3>Cameras</h3>
         </a>
     </div>
     <div class="category-card">
         <a href="{{ route('user.shop.query', ['query' => '', 'category' => 'Powerbanks', 'sort_by' => 'title', 'sort_direction' => 'asc']) }}">
-            <img src="https://via.placeholder.com/300x200" alt="Powerbanks">
+            <img src="https://rank.co.id/wp-content/uploads/2023/05/Power-Bank-Robot.jpg" alt="Powerbanks" style="width: 300px; height: 200px;">
             <h3>Powerbanks</h3>
         </a>
     </div>
@@ -173,11 +253,18 @@
                         </div>
 
                         <!-- Action Buttons -->
-                        <div class="card-footer bg-transparent border-0">
+                
+
+                       
+                        <div class="card-footer bg-transparent border-0 ">
                             <form action="{{ route('user.cart.add', $product->id) }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id_product" value="{{ $product->id }}">
-                                <button type="submit" class="btn btn-dark w-100 rounded-pill">Add to Cart</button>
+                                <button type="submit" class="button">
+                                    <span class="button__text">Add Item</span>
+                                    <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
+                                </button>
+                                
                             </form>
                         </div>
                     </div>
