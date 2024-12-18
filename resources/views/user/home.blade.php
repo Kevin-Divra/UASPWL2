@@ -173,6 +173,48 @@
     border: 1px solid #2e8644;
     }
 
+.btn {
+ padding: 0.5em 2em;
+ background: none;
+ border: 2px solid #fff;
+ font-size: 15px;
+ color: #131313;
+ cursor: pointer;
+ position: relative;
+ overflow: hidden;
+ transition: all 0.3s;
+ border-radius: 12px;
+ background-color: #ecd448;
+ font-weight: bolder;
+ box-shadow: 0 2px 0 2px #000;
+}
+
+.btn:before {
+ content: "";
+ position: absolute;
+ width: 100px;
+ height: 120%;
+ background-color: #ff6700;
+ top: 50%;
+ transform: skewX(30deg) translate(-150%, -50%);
+ transition: all 0.5s;
+}
+
+.btn:hover {
+ background-color: #4cc9f0;
+ color: #fff;
+ box-shadow: 0 2px 0 2px #0d3b66;
+}
+
+.btn:hover::before {
+ transform: skewX(30deg) translate(150%, -50%);
+ transition-delay: 0.1s;
+}
+
+.btn:active {
+ transform: scale(0.9);
+}
+
 
 </style>
 
@@ -182,7 +224,7 @@
     <h1>Push Your Limit</h1>
     <p style="color: black;">Explore exclusive products and deals curated just for you</p>
     <div>
-        <a href="/shop" style="color: black;">Shop Now</a>
+        <a href="/user/shop" class="btn">Shop Now</a>
     </div>
 
 </section>
@@ -191,19 +233,21 @@
 <section class="categories" id="categories">
     <div class="category-card">
         <a href="{{ route('user.shop.query', ['query' => '', 'category' => 'Laptop', 'sort_by' => 'title', 'sort_direction' => 'asc']) }}">
-            <img src="/storage/images/laptop.jpg" alt="Laptop">
+            <img src="https://www.ptbsb.id/wp-content/uploads/2022/09/13.-Distributor-Laptop-Gaming-20-Jutaan-Terpercaya-scaled.jpg" alt="Laptop" style="width: 300px; height: 200px;">
+
             <h3>Laptops</h3>
         </a>
     </div>
     <div class="category-card">
         <a href="{{ route('user.shop.query', ['query' => '', 'category' => 'Camera', 'sort_by' => 'title', 'sort_direction' => 'asc']) }}">
-            <img src="/storage/images/camera.jpg" alt="Camera">
+            <img src="https://www.adobe.com/creativecloud/photography/discover/media_1b4507ec1fa10efefcbe23c58bea28edf67c4f402.png?width=750&format=png&optimize=medium" alt="Camera" style="width: 300px; height: 200px;">
             <h3>Cameras</h3>
         </a>
     </div>
     <div class="category-card">
         <a href="{{ route('user.shop.query', ['query' => '', 'category' => 'Powerbanks', 'sort_by' => 'title', 'sort_direction' => 'asc']) }}">
-            <img src="/storage/images/powerbank.jpg" alt="Powerbanks">
+            <img src="https://rank.co.id/wp-content/uploads/2023/05/Power-Bank-Robot.jpg" alt="Powerbanks" style="width: 300px; height: 200px;">
+
             <h3>Powerbanks</h3>
         </a>
     </div>

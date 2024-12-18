@@ -11,6 +11,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CartController;
 
+
 // Public Routes
 Route::get('/', function () {
     return view('welcome');

@@ -21,6 +21,145 @@
         <link rel="stylesheet" type="text/css" href="{{asset('assets/css/plugins/easyzoom.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
         @yield('addition_css')
+        <style>
+    <style>
+    /* General Styling */
+    body {
+        background-color: #f9f9f9;
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .container {
+        max-width: 900px;
+        padding: 20px 15px;
+    }
+
+    h3 {
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    h5 {
+        font-size: 16px;
+        font-weight: 500;
+        color: #555;
+        margin-bottom: 15px;
+    }
+
+    h4 {
+        font-size: 18px;
+        color: #444;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    .card {
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    .card-body {
+        padding: 25px;
+    }
+
+    .form-group label {
+        font-weight: 500;
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    /* Table Styling */
+    .table {
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    .table thead {
+        background-color: #977450; /* Warna coklat muda */
+        color: #fff;
+    }
+
+    .table thead th {
+        text-align: left;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .table tbody td {
+        padding: 12px;
+        color: #333;
+        vertical-align: middle;
+    }
+
+    .table tbody tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+
+    .table tbody tr td {
+        font-size: 13px;
+    }
+
+    /* Alert Styling */
+    .alert {
+        border-radius: 8px;
+        padding: 15px;
+        font-size: 13px;
+        background-color: #fdf7f7;
+        border-color: #f8d7da;
+        color: #721c24;
+        margin-top: 15px;
+    }
+
+    .alert strong {
+        font-weight: 600;
+    }
+
+    /* Button Styling */
+    .btn-primary {
+        background-color:rgb(42, 176, 65);
+        border: none;
+        border-radius: 6px;
+        padding: 0px 20px;
+        font-size: 15px;
+        font-weight: 700;
+        color: #fff;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: rgb(21, 103, 35);
+    }
+
+    /* Spacing */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    /* Responsive Styling */
+    @media (max-width: 768px) {
+        .container {
+            padding: 10px;
+        }
+
+        h3, h4, h5 {
+            font-size: 16px;
+        }
+
+        .table tbody tr td {
+            font-size: 12px;
+        }
+    }
+</style>
+
         <!-- END CSS Assets-->
     </head>
     <body class="box-home">

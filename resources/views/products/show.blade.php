@@ -10,7 +10,7 @@
     <style>
         /* Background styling */
         body {
-            background-color: #f4f7fc;
+            background-color: #f9f9f9;
             font-family: 'Poppins', sans-serif;
         }
 
@@ -26,57 +26,73 @@
             font-weight: 700;
             color: white;
             background-color: #1d3557;
-            padding: 10px 15px;
+            padding: 15px;
             border-radius: 8px;
-            display: inline-block;
+            text-align: center;
+            margin-bottom: 30px;
         }
 
         /* Card styling for the image */
         .card-image {
+
             border-radius: 10px;
             box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-            border: none;
             background-color: #ffffff;
             text-align: center;
-            padding-bottom: 20px;
-            height: 100%;
-            display: flex;
-            padding: 0px 20px 0px 20px;
-            
         }
 
         /* Product image styling */
         .product-image {
             border-radius: 15px;
+    
             width: 100%;
             height: auto;
-            object-fit: contain;
+            object-fit: cover;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            max-height: 300px;
+        }
+
+        /* Product details section */
+        .product-details-section {
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            
+        }
+
+        /* Product title */
+        .product-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1d3557;
         }
 
         /* Product details text */
         .product-details {
-            font-size: 1rem;
+            font-size: 1.2rem;
             color: #6c757d;
             margin-bottom: 10px;
         }
 
         /* Price styling */
         .product-price {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: bold;
             color: #1d3557;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         /* Code block styling */
         code {
             background-color: #f0f4f8;
-            padding: 10px;
+            padding: 15px;
             border-radius: 8px;
             display: block;
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: #333;
             margin-bottom: 20px;
+            white-space: pre-wrap;
         }
 
         /* Horizontal line styling */
@@ -90,12 +106,18 @@
             color: white;
             border-radius: 8px;
             padding: 10px 20px;
-            font-size: 1rem;
+            font-size: 1.1rem;
             display: inline-block;
             text-align: center;
             text-decoration: none;
             margin-top: 20px;
             width: 100%;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-back:hover {
+            background-color: #36526b;
+            transition: background-color 0.3s ease;
         }
 
         /* Additional styling for responsiveness */
@@ -109,7 +131,12 @@
             }
 
             code {
-                font-size: 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding-left: 15px;
+                padding-right: 15px;
             }
         }
     </style>
@@ -118,25 +145,25 @@
 <body>
 
     <div class="container">
+        <h3 class="product-header">Show Product</h3>
         <div class="row">
-            <h3 class="product-header">Show Product</h3>
-            <div class="col-md-4">
+            <!-- Left Column: Product Image -->
+            <div class="col-lg-4 col-md-5 col-sm-12 mb-4">
                 <div class="card-image">
                     <img src="{{ asset('/storage/images/' .$product->image) }}" alt="Product Image" class="product-image">
                 </div>
             </div>
-            <div class="col-md-8">
-                <div class="card border-0 shadow-sm rounded p-4">
-                    <h3 class="product-header">{{ ucwords($product->title) }}</h3>
+            <!-- Right Column: Product Details -->
+            <div class="col-lg-8 col-md-7 col-sm-12">
+                <div class="product-details-section">
+                    <h3 class="product-title">{{ ucwords($product->title) }}</h3>
                     <hr />
                     <p class="product-details">Category: <strong>{{ ucwords($product->product_category_name) }}</strong></p>
-                    <hr />
                     <p class="product-price">Price: Rp{{ number_format($product->price, 2, ',', '.') }}</p>
                     <hr />
                     <code>
                         <p>{!! ucwords($product->description) !!}</p>
                     </code>
-                    <hr />
                     <p class="product-details">Stock: <strong>{{ $product->stock }}</strong></p>
                     <a href="javascript:history.back()" class="btn-back">Back</a>
                 </div>

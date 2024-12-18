@@ -25,36 +25,41 @@
             left: 0;
             height: 100%;
             width: 240px;
-            background-color: #DDE7E7;
+            background-color: #1E3E62;
             padding-top: 1px;
         }
         .sidebar a {
             display: flex;
             align-items: center;
-            justify-content: center; 
-            gap: 10px; 
+            justify-content: center; /* Untuk menempatkan ikon dan teks di tengah */
+            gap: 10px; /* Memberikan jarak antara ikon dan teks */
             padding: 15px;
             color: #585656;
             text-decoration: none;
             font-size: 18px;
         }
         .sidebar a i {
-            font-size: 20px; 
+            font-size: 20px; /* Tambahkan jarak antara ikon dan teks */
+            
         }
+        .sidebar a {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
         .sidebar a:hover {
             background-color: #2F609C;
-            color: #FFD941;
+            color: rgb(255, 255, 255);
         }
         .sidebar h2 {
-            color: #585656;
+            color:rgb(255, 255, 255);
             text-align: center;
-            background-color: #FFD700; 
-            padding: 10px; 
-            margin: 0; 
-            height: 100px; 
+            
+            padding: 10px; /* Padding for internal spacing */
+            margin: 0; /* Remove the margin */
+            height: 100px; /* Set an appropriate height to extend to the top */
             display: flex;
-            align-items: center; 
-            justify-content: center;
+            align-items: center; /* Align content vertically */
+            justify-content: center; /* Align content horizontally */
             border-radius: 5px;
         }
         .main-content {
@@ -248,8 +253,8 @@
             background-color: #FFD700;
             color: #000;
         }
-        
-    </style>
+
+    </style>    
 </head>
 <body>
     <div class="sidebar">

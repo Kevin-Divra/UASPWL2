@@ -9,6 +9,7 @@
         .button {
         position: relative;
         width: 150px;
+        margin-left: 2em;
         height: 40px;
         cursor: pointer;
         display: flex;
@@ -166,8 +167,3 @@
 @endsection
 
 
-    @endif
-</div>
-
-@endsection
-                    

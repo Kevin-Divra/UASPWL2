@@ -34,7 +34,8 @@ class Payment extends Model
         $sql = $this->select(
             'payment.*',
             'order.total_price',
-            'users.name',
+            'users.name',       
+            'users.email as buyer_email',     
             DB::raw('GROUP_CONCAT(products.title SEPARATOR ", ") as product_names'),
             DB::raw('GROUP_CONCAT(products.price SEPARATOR ", ") as product_prices'),
             DB::raw('GROUP_CONCAT(order_detail.quantity SEPARATOR ", ") as product_quantities'),
@@ -52,7 +53,9 @@ class Payment extends Model
             'payment.created_at',    // Non-aggregated field from payment table
             'payment.updated_at',    // Non-aggregated field from payment table
             'users.name',    // Non-aggregated field from payment table
+            'buyer_email',    // Non-aggregated field from payment table
             'order.total_price'      // Non-aggregated field from order table
+
 
         );
         return $sql;

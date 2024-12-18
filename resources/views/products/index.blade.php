@@ -25,7 +25,7 @@
             left: 0;
             height: 100%;
             width: 240px;
-            background-color: #DDE7E7;
+            background-color: #1E3E62;
             padding-top: 1px;
         }
         .sidebar a {
@@ -40,15 +40,20 @@
         }
         .sidebar a i {
             font-size: 20px; /* Tambahkan jarak antara ikon dan teks */
+            
         }
+        .sidebar a {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
         .sidebar a:hover {
             background-color: #2F609C;
-            color: #FFD941;
+            color: rgb(255, 255, 255);
         }
+
         .sidebar h2 {
-            color: #585656;
+            color:rgb(255, 255, 255);
             text-align: center;
-            background-color: #FFD700; /* Yellow background */
             padding: 10px; /* Padding for internal spacing */
             margin: 0; /* Remove the margin */
             height: 100px; /* Set an appropriate height to extend to the top */
@@ -248,8 +253,83 @@
             background-color: #FFD700;
             color: #000;
         }
+
+.button {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #1E3E62;
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: .3s;
+  overflow: hidden;
+  position: relative;
+}
+
+.svgIcon {
+  width: 12px;
+  transition-duration: .3s;
+}
+
+.svgIcon path {
+  fill: white;
+}
+
+.button:hover {
+  width: 140px;
+  height: 50px;
+  border-radius: 50px;
+  transition-duration: .3s;
+  background-color: rgb(255, 69, 69);
+  align-items: center;
+}
+
+.button:hover .svgIcon {
+  width: 30px;
+  transition-duration: .3s;
+  transform: translateY(60%);
+}
+
+.delete::before {
+  position: absolute;
+  top: -20px;
+  content: "Delete";
+  color: white;
+  transition-duration: .3s;
+  font-size: 2px;
+}
+
+.edit::before {
+  position: absolute;
+  top: -20px;
+  content: "Edit";
+  color: white;
+  transition-duration: .3s;
+  font-size: 2px;
+}
+
+.view::before {
+  position: absolute;
+  top: -20px;
+  content: "View";
+  color: white;
+  transition-duration: .3s;
+  font-size: 2px;
+}
+
+.button:hover::before {
+  font-size: 13px;
+  opacity: 1;
+  transform: translateY(30px);
+  transition-duration: .3s;
+}
         
-    </style>
+    </style>    
 </head>
 <body>
     <div class="sidebar">
@@ -290,15 +370,24 @@
                                     <form id="delete-form-{{ $product->id }}" action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <a href="{{ route('products.show', $product->id) }}" class="view" data-toggle="tooltip" title="View">
-                                            <i class="material-icons">&#xE417;</i>
+                                        <a href="{{ route('products.show', $product->id) }}" class="view button" data-toggle="tooltip" title="View">
+                                            <svg viewBox="0 0 576 512" class="svgIcon">
+                                                <path d="M572.52 241.4C518.68 135.58 406.8 64 288 64S57.32 135.58 3.48 241.4a48.44 48.44 0 000 29.2C57.32 376.42 169.2 448 288 448s230.68-71.58 284.52-177.4a48.44 48.44 0 000-29.2zM288 400c-73.38 0-133.6-60.2-133.6-133.6S214.62 132.8 288 132.8s133.6 60.2 133.6 133.6S361.38 400 288 400zm0-212.8c-43.82 0-79.6 35.78-79.6 79.6s35.78 79.6 79.6 79.6 79.6-35.78 79.6-79.6-35.78-79.6-79.6-79.6z"></path>
+                                            </svg>
+                                            </a>
+
+                                        <a href="{{ route('products.edit', $product->id) }}" class="edit button" data-toggle="tooltip" title="Edit">
+                                        <svg viewBox="0 0 448 512" class="svgIcon">
+                                            <path d="M362.7 19.3c12.5-12.5 32.8-12.5 45.3 0l25.7 25.7c12.5 12.5 12.5 32.8 0 45.3l-56.6 56.6-71-71 56.6-56.6zM124.1 308.5l71 71-206.1 86.6c-15.2 6.4-32.1-1.4-38.5-16.6l-19.3-46.2c-6.4-15.2 1.4-32.1 16.6-38.5L124.1 308.5z"></path>
+                                        </svg>
                                         </a>
-                                        <a href="{{ route('products.edit', $product->id) }}" class="edit" data-toggle="tooltip" title="Edit">
-                                            <i class="material-icons">&#xE254;</i>
-                                        </a>
-                                        <a href="#" onclick="showDeleteConfirmation({{ $product->id }})" class="delete" data-toggle="tooltip" title="Delete">
-                                            <i class="material-icons">&#xE872;</i>
-                                        </a>
+
+                                        <a href="#" onclick="showDeleteConfirmation({{ $product->id }})" class="delete button" data-toggle="tooltip" title="Delete">
+                                            <svg viewBox="0 0 448 512" class="svgIcon">
+                                                <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
+                                            </svg>
+                                            </a>
+
                                     </form>
                                 </td>
                             </tr>
